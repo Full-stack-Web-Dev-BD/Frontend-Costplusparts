@@ -14,6 +14,8 @@ import { connect } from 'react-redux';
 import { login } from '../../store/actions/authActions';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import { BASE_URL } from "../../utils/constant";
+import axios from "axios";
 
 const Signin = () => {
 
@@ -25,10 +27,17 @@ const Signin = () => {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const error = useSelector((state) => state.auth.error);
 
-  const handleSubmit = (e) => {
-    console.log('handle Submit');
+  const [loginError, setloginError] = useState({})
+
+  const handleSubmit = async(e) => { 
     e.preventDefault();
-    dispatch(login(email, password));
+    // dispatch(login(email, password)); 
+      try {
+        const response = await axios.post(`${BASE_URL}/api/auth`, { email, password });
+      } catch (error) {
+        console.log("login error", error)
+        setloginError(error.response?.data)
+      } 
   };
 
   // Monitor changes to isAuthenticated, and redirect on successful signup
@@ -58,6 +67,11 @@ const Signin = () => {
               <h3 className="mb-0">Start Here to Get a Quote!</h3>
               <p className="text-dark">We need some basic info about you. Learn why we ask.</p>
             </div>
+            {
+              loginError?.errors?.map(err=>(
+                <p className="text-danger"> {err.msg} </p>
+              ))
+            }
             <Form className="mt-4" onSubmit={handleSubmit}>
               <Form.Group id="Email" className="mb-4">
                 <Form.Label>Email</Form.Label>

@@ -2,10 +2,13 @@ import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 
 export const login = (email, password) => async (dispatch) => {
+  // alert("Please call ")
   try {
     const response = await axios.post('http://localhost:5000/api/auth', { email, password });
+    console.log("response", response.data)
     dispatch({ type: 'LOGIN_SUCCESS', payload: response.data });
   } catch (error) {
+    console.log("login error", error)
     dispatch({ type: 'LOGIN_FAILURE', payload: error.message });
   }
 };
