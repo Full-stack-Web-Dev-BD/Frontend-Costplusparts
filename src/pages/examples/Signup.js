@@ -14,6 +14,7 @@ import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { signup } from '../../store/actions/authActions';
+import toast from "react-hot-toast";
 
 const Signup = () => {
 
@@ -34,8 +35,8 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (confirmpassword != password) {
-      alert('Password does not match.');
+    if (confirmpassword != password) { 
+      toast.error('Password does not match.');
       return;
     }
     dispatch(signup(firstname, lastname, company, country, phone, email, password));

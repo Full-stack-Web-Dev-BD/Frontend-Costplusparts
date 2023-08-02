@@ -1,4 +1,5 @@
 import axios from 'axios';
+import toast from 'react-hot-toast';
 import { useHistory } from 'react-router-dom';
 
 export const login = (email, password) => async (dispatch) => {
@@ -22,9 +23,9 @@ export const signup = (firstname, lastname, company, country, phone, email, pass
   try {
     const response = await axios.post('http://localhost:5000/api/users', { firstname, lastname, company, country, phone, email, password });
     dispatch({ type: 'LOGIN_SUCCESS', payload: {firstname, lastname, company, country, phone, email, password} });
-    alert('Successfully Registered.');
+    toast.success('Successfully Registered.');
   } catch (error) {
     dispatch({ type: 'LOGIN_FAILURE', payload: error.message });
-    alert(error.message);
+    toast.error(error.message);
   }
 };
