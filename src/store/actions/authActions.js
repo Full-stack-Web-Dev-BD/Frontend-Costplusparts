@@ -11,9 +11,10 @@ export const login = (email, password) => async (dispatch) => {
       password,
     });
     window.localStorage.setItem("token", response.data.token);
-    const decodedToken = jwtDecode(response.data.token);
+    // const decodedToken = jwtDecode(response.data.token);
+    window.location.href='/#/dashboard/overview'
+    // dispatch({ type: "LOGIN_SUCCESS", payload: decodedToken.user });
 
-    dispatch({ type: "LOGIN_SUCCESS", payload: decodedToken.user });
   } catch (error) {
     console.log("login error", error);
     var errorsResponse;
