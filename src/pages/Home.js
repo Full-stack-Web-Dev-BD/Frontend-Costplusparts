@@ -36,14 +36,12 @@ import features from "../data/features";
 export default () => {
   const PagePreview = (props) => {
     const { name, image, link, content } = props;
-
     return (
       <Col xs={12} lg={4} className="mb-5">
         <Card.Link as={Link} to={link} className="page-preview page-preview-lg scale-up-hover-2">
           <Image src={image} className="shadow-lg rounded scale" alt="Dashboard page preview" style={{ width: '100%' }} />
           <h3 className="mt-3">{name}</h3>
-          <div>{content}</div>
-
+          <div>{content}</div> 
           <div className="text-center show-on-hover">
             <h6 className="m-0 text-center text-white">
               {name} <FontAwesomeIcon icon={faExternalLinkAlt} className="ms-2" />

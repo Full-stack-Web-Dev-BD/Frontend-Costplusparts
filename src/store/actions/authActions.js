@@ -2,6 +2,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { useHistory } from "react-router-dom";
 import { BASE_URL } from "../../utils/constant";
+import jwtDecode from "jwt-decode";
 
 export const login = (email, password) => async (dispatch) => {
   try {
@@ -9,8 +10,10 @@ export const login = (email, password) => async (dispatch) => {
       email,
       password,
     });
-    window.localStorage.setItem("token", response.data.token)
-    // dispatch({ type: "LOGIN_SUCCESS", payload: response.data });
+    window.localStorage.setItem("token", response.data.token);
+    const decodedToken = jwtDecode(response.data.token);
+
+    dispatch({ type: "LOGIN_SUCCESS", payload: decodedToken.user });
   } catch (error) {
     console.log("login error", error);
     var errorsResponse;
