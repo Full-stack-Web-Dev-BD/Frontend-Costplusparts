@@ -31,13 +31,13 @@ const Signin = () => {
 
   const handleSubmit = async(e) => { 
     e.preventDefault();
-    // dispatch(login(email, password)); 
-      try {
-        const response = await axios.post(`${BASE_URL}/api/auth`, { email, password });
-      } catch (error) {
-        console.log("login error", error)
-        setloginError(error.response?.data)
-      } 
+    dispatch(login(email, password)); 
+      // try {
+      //   const response = await axios.post(`${BASE_URL}/api/auth`, { email, password });
+      // } catch (error) {
+      //   console.log("login error", error)
+      //   setloginError(error.response?.data)
+      // } 
   };
 
   // Monitor changes to isAuthenticated, and redirect on successful signup
