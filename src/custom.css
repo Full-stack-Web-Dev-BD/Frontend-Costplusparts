@@ -1,0 +1,54 @@
+/* shortcut */
+.cp {
+    cursor: pointer;
+}
+
+
+.navbar {
+    background: white;
+    padding: 20px 0 !important;
+}
+
+.custom_search_input input,
+.custom_search_input span {
+    border: 0 !important;
+}
+
+/* .content{
+    background-color: white !important;
+} */
+@media (min-width: 768px) {
+    .content {
+        margin-left: 240px !important;
+    }
+}
+
+.pl_15 {
+    padding-left: 15px !important;
+}
+.sc_job{
+    width: 100%;
+    height: 300px;
+    background: rgba(128, 128, 128, 0.082);
+    position: relative;
+    border-radius: 10px;
+}
+.sc_jobs_content{
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    text-align: center;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.sc_job svg{
+    font-size: 50px;
+}
+.sc_job span{
+    font-size: 22px;
+}
+.sc_my_job{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}

@@ -23,6 +23,7 @@ import  { Toaster } from 'react-hot-toast';
 
 // vendor styles
 import "react-datetime/css/react-datetime.css";
+import "./custom.css"
 
 import HomePage from "./pages/HomePage";
 import ScrollToTop from "./components/ScrollToTop";
