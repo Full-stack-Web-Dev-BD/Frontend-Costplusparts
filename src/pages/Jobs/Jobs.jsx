@@ -1,5 +1,6 @@
 import React from "react";
 import { AiOutlinePlus } from "react-icons/ai";
+import { Link } from "react-router-dom";
 
 const Jobs = () => {
   return (
@@ -7,11 +8,13 @@ const Jobs = () => {
       <div className="row mt-5">
         <div className="col-md-4 cp">
           <div className="sc_job">
-            <div className="sc_jobs_content tex-center">
-              <AiOutlinePlus />
-              <br />
-              <span>Scedule A Job</span>
-            </div>
+            <Link to={"/scedule-job"}>
+              <div className="sc_jobs_content tex-center">
+                <AiOutlinePlus />
+                <br />
+                <span>Scedule A Job</span>
+              </div>
+            </Link>
           </div>
         </div>
 
