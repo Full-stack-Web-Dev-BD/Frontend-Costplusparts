@@ -1,9 +1,15 @@
 /* shortcut */
+.y_center{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
 .cp {
     cursor: pointer;
 }
-
-.content {}
+.hrs{
+    color: gray;
+} 
 
 .navbar {
     background: white;
@@ -60,3 +66,17 @@
 }
 
 .scedule_jobs {}
+
+
+/* dashboard */
+.pie_holder{
+    position: relative;
+}
+.pie_holder span{
+    font-size: 22px;
+    font-weight: 600;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

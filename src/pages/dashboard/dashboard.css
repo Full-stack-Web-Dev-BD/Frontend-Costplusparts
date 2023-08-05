@@ -1,0 +1,39 @@
+._up,
+._up h6
+{
+    color: #10B981
+}
+.h-220{
+    height: 220px !important;
+}
+.st_title{
+    display: flex;
+    justify-content: space-between;
+    padding:  10px 10px;
+    align-items: center;
+}
+.st_title span{
+    margin: 10px 20px;
+    font-size: 22px;
+    font-weight: 700;
+    color: #175DAF;
+}
+.border-btn{
+    border: 1px solid #9a9899;
+    padding: 5px 20px;
+    margin: 10px 0;
+}
+.material_box{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 1px solid #73737361;
+    width: 200px;
+    padding: 20px;
+    border-radius: 11px;
+}
+.btn_cont{
+    background: #161842;
+    color: white;
+    padding: 7px 30px;
+}

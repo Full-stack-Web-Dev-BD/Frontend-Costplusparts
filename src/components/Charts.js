@@ -5,8 +5,9 @@ import ChartistTooltip from 'chartist-plugin-tooltips-updated';
 
 export const SalesValueChart = () => {
   const data = {
-    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-    series: [[1, 2, 2, 3, 3, 4, 3]]
+    series: [[1, 2, 2, 3, 3, 4, 3],
+    [30, 30,10, 2, 20, , 40, 3]
+  ]
   };
 
   const options = {
@@ -36,7 +37,6 @@ export const SalesValueChart = () => {
 
 export const SalesValueChartphone = () => {
   const data = {
-    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
     series: [[1, 2, 2, 3, 3, 4, 3]]
   };
 
@@ -47,6 +47,13 @@ export const SalesValueChartphone = () => {
     axisX: {
       position: 'end',
       showGrid: true
+    },
+    
+    legend: {
+      show: false, // This line disables the legend
+    },
+    label:{
+      show:false,
     },
     axisY: {
       // On the y-axis start means left and end means right
@@ -61,7 +68,9 @@ export const SalesValueChartphone = () => {
   ]
 
   return (
-    <Chartist data={data} options={{...options, plugins}} type="Line" className="ct-series-g ct-major-tenth" />
+    <div>
+    {/* <Chartist data={data} options={{...options, plugins}} type="Line" className="ct-series-g ct-major-tenth" /> */}
+    </div>
   );
 };
 

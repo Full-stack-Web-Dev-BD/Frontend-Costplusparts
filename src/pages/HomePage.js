@@ -6,7 +6,6 @@ import { Routes } from "../routes";
 import Presentation from "./Presentation";
 import Home from "./Home";
 import Upgrade from "./Upgrade";
-import DashboardOverview from "./dashboard/DashboardOverview";
 import Transactions from "./Transactions";
 import Settings from "./Settings";
 import BootstrapTables from "./tables/BootstrapTables";
@@ -51,6 +50,8 @@ import Tooltips from "./components/Tooltips";
 import Toasts from "./components/Toasts";
 import Jobs from './Jobs/Jobs';
 import SceduleJobs from './Jobs/SceduleJobs';
+import { DashboardPage } from './dashboard/DashboardPage';
+import MaterialandQuestions from './Jobs/MaterialandQuestions';
 
 const RouteWithLoader = ({ component: Component, ...rest }) => {
   const [loaded, setLoaded] = useState(false);
@@ -113,11 +114,14 @@ export default () => (
     <RouteWithLoader exact path={Routes.ServerError.path} component={ServerError} />
 
     {/* pages */}
-    <RouteWithSidebar exact path={Routes.Dashboard.path} component={DashboardOverview} />
+    <RouteWithSidebar exact path={Routes.Dashboard.path} component={DashboardPage} />
+    {/* Jobs */}
     <RouteWithSidebar exact path={Routes.Jobs.path} component={Jobs} />
     <RouteWithSidebar exact path={'/scedule-job'} component={SceduleJobs} />
+    <RouteWithSidebar exact path={'/material-and-questions'} component={MaterialandQuestions} />
+    
     {/* old */}
-    <RouteWithSidebar exact path={Routes.DashboardOverview.path} component={DashboardOverview} />
+    <RouteWithSidebar exact path={Routes.DashboardOverview.path} component={DashboardPage} />
     <RouteWithSidebar exact path={Routes.Upgrade.path} component={Upgrade} />
     <RouteWithSidebar exact path={Routes.Transactions.path} component={Transactions} />
     <RouteWithSidebar exact path={Routes.Settings.path} component={Settings} />
