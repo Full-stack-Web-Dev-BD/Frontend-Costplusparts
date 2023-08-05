@@ -1,8 +1,8 @@
 import React from "react";
 import { Card } from "@mui/material";
-import {AiOutlineMinus, AiOutlinePlus} from "react-icons/ai"
+import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
+import { Link } from "react-router-dom";
 const MaterialandQuestions = () => {
-
   return (
     <div className="p-4 mt-4">
       <Card className="p-4">
@@ -38,12 +38,15 @@ const MaterialandQuestions = () => {
         <Card className="p-5">
           <h2 className="text-gray">1. Material and Finish</h2>
           <form className="mt-4">
-            <div class="form-group row " style={{marginBottom:'2rem'}}>
+            <div class="form-group row " style={{ marginBottom: "2rem" }}>
               <label for="inputPassword" class="col-sm-2 col-form-label">
-              Material
+                Material
               </label>
               <div class="col-sm-10">
-                <select className="form-control " style={{borderRadius:'0px'}}>
+                <select
+                  className="form-control "
+                  style={{ borderRadius: "0px" }}
+                >
                   <option> Inconel 718 </option>
                   <option> Inconel 718 </option>
                   <option> Inconel 718 </option>
@@ -51,13 +54,16 @@ const MaterialandQuestions = () => {
                 </select>
               </div>
             </div>
-            
-            <div class="form-group row " style={{marginBottom:'2rem'}}>
+
+            <div class="form-group row " style={{ marginBottom: "2rem" }}>
               <label for="inputPassword" class="col-sm-2 col-form-label">
-              Resolution
+                Resolution
               </label>
               <div class="col-sm-10">
-                <select className="form-control " style={{borderRadius:'0px'}}>
+                <select
+                  className="form-control "
+                  style={{ borderRadius: "0px" }}
+                >
                   <option> Normal Res</option>
                   <option> Normal Res</option>
                   <option> Normal Res</option>
@@ -65,13 +71,16 @@ const MaterialandQuestions = () => {
                 </select>
               </div>
             </div>
-            
-            <div class="form-group row " style={{marginBottom:'2rem'}}>
+
+            <div class="form-group row " style={{ marginBottom: "2rem" }}>
               <label for="inputPassword" class="col-sm-2 col-form-label">
-              Finish
+                Finish
               </label>
               <div class="col-sm-10">
-                <select className="form-control " style={{borderRadius:'0px'}}>
+                <select
+                  className="form-control "
+                  style={{ borderRadius: "0px" }}
+                >
                   <option> Standard </option>
                   <option> Standard </option>
                   <option> Standard </option>
@@ -79,13 +88,16 @@ const MaterialandQuestions = () => {
                 </select>
               </div>
             </div>
-            
-            <div class="form-group row " style={{marginBottom:'2rem'}}>
+
+            <div class="form-group row " style={{ marginBottom: "2rem" }}>
               <label for="inputPassword" class="col-sm-2 col-form-label">
-              Orientation
+                Orientation
               </label>
               <div class="col-sm-10">
-                <select className="form-control " style={{borderRadius:'0px'}}>
+                <select
+                  className="form-control "
+                  style={{ borderRadius: "0px" }}
+                >
                   <option> Let us decide </option>
                   <option> Let us decide </option>
                   <option> Let us decide </option>
@@ -93,23 +105,36 @@ const MaterialandQuestions = () => {
                 </select>
               </div>
             </div>
-            
-            <div class="form-group row " style={{marginBottom:'2rem'}}>
+
+            <div class="form-group row " style={{ marginBottom: "2rem" }}>
               <label for="inputPassword" class="col-sm-2 col-form-label">
-              Material
+                Material
               </label>
               <div class="col-sm-2">
-                <div className="row" style={{alignItems:'center'}} >
-                  <div className="text-center col-md-4"><AiOutlineMinus className="cp"/> </div>
-                  <div className=" col-md-4"> <input className="form-control" style={{borderRadius:'0px'}}/> </div>
-                  <div className="text-center col-md-4"> <AiOutlinePlus className="cp"/> </div>
+                <div className="row" style={{ alignItems: "center" }}>
+                  <div className="text-center col-md-4">
+                    <AiOutlineMinus className="cp" />{" "}
+                  </div>
+                  <div className=" col-md-4">
+                    {" "}
+                    <input
+                      className="form-control"
+                      style={{ borderRadius: "0px" }}
+                    />{" "}
+                  </div>
+                  <div className="text-center col-md-4">
+                    {" "}
+                    <AiOutlinePlus className="cp" />{" "}
+                  </div>
                 </div>
               </div>
             </div>
           </form>
           <h2 className="text-gray"> 2.More Options</h2>
           <div className="text-right">
-            <button className="btn btn_cont">Continue</button>
+            <Link to="/job-zone/material">
+              <button className="btn btn_cont">Continue</button>
+            </Link>
           </div>
         </Card>
       </div>

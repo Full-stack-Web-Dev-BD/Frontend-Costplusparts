@@ -1,29 +1,33 @@
 ._up,
-._up h6
-{
+._up h6 {
     color: #10B981
 }
-.h-220{
+
+.h-220 {
     height: 220px !important;
 }
-.st_title{
+
+.st_title {
     display: flex;
     justify-content: space-between;
-    padding:  10px 10px;
+    padding: 10px 10px;
     align-items: center;
 }
-.st_title span{
+
+.st_title span {
     margin: 10px 20px;
     font-size: 22px;
     font-weight: 700;
     color: #175DAF;
 }
-.border-btn{
+
+.border-btn {
     border: 1px solid #9a9899;
     padding: 5px 20px;
     margin: 10px 0;
 }
-.material_box{
+
+.material_box {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -32,8 +36,55 @@
     padding: 20px;
     border-radius: 11px;
 }
-.btn_cont{
+
+.btn_cont {
     background: #161842;
     color: white;
     padding: 7px 30px;
+}
+
+/* up mui */
+.css-1h9z7r5-MuiButtonBase-root-MuiTab-root {
+    text-transform: capitalize !important;
+    font-size: 18px !important;
+    font-weight: 500 !important;
+}
+
+.css-1h9z7r5-MuiButtonBase-root-MuiTab-root.Mui-selected {
+    color: #1C1E53 !important;
+}
+
+.css-1aquho2-MuiTabs-indicator {
+    background-color: #1C1E53 !important;
+    height: 5px !important;
+}
+
+.css-1gsv261 {
+    background-color: white;
+}
+
+.css-heg063-MuiTabs-flexContainer {
+    padding: 20px;
+}
+
+.job_tab_wrap {
+    display: flex;
+    align-items: center;
+    gap: 100px;
+    padding: 0 25px;
+}
+
+.status_btn{
+    padding: 5px 10px;
+    color: white;
+    border-radius: 20px;
+}
+.in_progress{
+    background-color: #29D83B;
+}
+.in_stop{
+    background-color:  #E52D2D;
+}
+.in_completed{
+    background-color: #4092DE;
 }
