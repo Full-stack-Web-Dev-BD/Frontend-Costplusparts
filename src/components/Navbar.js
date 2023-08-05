@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import {IoIosArrowDown} from 'react-icons/io'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBell,
@@ -24,7 +25,8 @@ import {
 
 import { MdDarkMode, MdOutlineLightMode } from "react-icons/md";
 import NOTIFICATIONS_DATA from "../data/notifications";
-import Profile3 from "../assets/img/team/profile-picture-3.jpg";
+import Profile3 from "../assets/img/team/profile-picture-3.jpg"; 
+import ModeSwitch from "./ModeSwitch/ModeSwitch";
 
 export default (props) => {
   const [notifications, setNotifications] = useState(NOTIFICATIONS_DATA);
@@ -86,21 +88,11 @@ export default (props) => {
               </Form.Group>
             </Form>
           </div>
-          <Nav className="align-items-center" style={{ gap: "45px" }}>
-            <div>
-              <span className="cp">
-                {isDark ? (
-                  <MdDarkMode
-                    onClick={(e) => setisDark(!isDark)}
-                    style={{ fontSize: "30px" }}
-                  />
-                ) : (
-                  <MdOutlineLightMode
-                    onClick={(e) => setisDark(!isDark)}
-                    style={{ fontSize: "30px" }}
-                  />
-                )}
-              </span>
+          <Nav className="align-items-center" >
+            <div 
+            style={{ marginRight: "45px" }}
+            >
+              <ModeSwitch/> 
             </div>
             <Dropdown as={Nav.Item}>
               <Dropdown.Toggle as={Nav.Link} className="pt-1 px-0">
@@ -148,6 +140,9 @@ export default (props) => {
                 </Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
+            <div>
+              <IoIosArrowDown/>
+            </div>
           </Nav>
         </div>
       </Container>
