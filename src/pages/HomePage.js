@@ -54,6 +54,7 @@ import { DashboardPage } from './dashboard/DashboardPage';
 import MaterialandQuestions from './Jobs/MaterialandQuestions';
 import Materials from './dashboard/JobsZone/Materials';
 import UploadPart from './dashboard/JobsZone/UploadPart';
+import Parts from './dashboard/JobsZone/Parts/Parts';
 
 const RouteWithLoader = ({ component: Component, ...rest }) => {
   const [loaded, setLoaded] = useState(false);
@@ -123,6 +124,8 @@ export default () => (
     <RouteWithSidebar exact path={'/material-and-questions'} component={MaterialandQuestions} />
     <RouteWithSidebar exact path={'/job-zone/material'} component={Materials} />
     <RouteWithSidebar exact path={'/upload/material'} component={UploadPart} />
+    <RouteWithSidebar exact path={'/parts'} component={Parts} />
+
     
     {/* old */}
     <RouteWithSidebar exact path={Routes.DashboardOverview.path} component={DashboardPage} />
