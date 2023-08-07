@@ -41,7 +41,7 @@ function a11yProps(index) {
   };
 }
 
-export default function JobTabs() {
+export default function ProfileTabs() {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {

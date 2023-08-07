@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import {IoIosArrowDown} from 'react-icons/io'
+import { IoIosArrowDown } from 'react-icons/io'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link } from "react-router-dom";
 import {
   faBell,
   faCog,
@@ -25,7 +26,7 @@ import {
 
 import { MdDarkMode, MdOutlineLightMode } from "react-icons/md";
 import NOTIFICATIONS_DATA from "../data/notifications";
-import Profile3 from "../assets/img/team/profile-picture-3.jpg"; 
+import Profile6 from "../assets/img/team/profile-picture-6.jpg";
 import ModeSwitch from "./ModeSwitch/ModeSwitch";
 
 export default (props) => {
@@ -89,10 +90,10 @@ export default (props) => {
             </Form>
           </div>
           <Nav className="align-items-center" >
-            <div 
-            style={{ marginRight: "45px" }}
+            <div
+              style={{ marginRight: "45px" }}
             >
-              <ModeSwitch/> 
+              <ModeSwitch />
             </div>
             <Dropdown as={Nav.Item}>
               <Dropdown.Toggle as={Nav.Link} className="pt-1 px-0">
@@ -101,21 +102,23 @@ export default (props) => {
                   style={{ gap: "10px" }}
                 >
                   <div className="media-body ms-2 text-dark align-items-center d-none d-lg-block">
-                    <span> Alamin Hossen </span>
+                    <span> Fabricio Guardia </span>
                     <br />
-                    <span className="mb-0 font-small fw-bold">Designer</span>
+                    <span className="mb-0 font-small fw-bold">Individual</span>
                     <br />
                   </div>
                   <Image
-                    src={Profile3}
+                    src={Profile6}
                     className="user-avatar md-avatar rounded-circle"
                   />
                 </div>
               </Dropdown.Toggle>
               <Dropdown.Menu className="user-dropdown dropdown-menu-right mt-2">
                 <Dropdown.Item className="fw-bold">
-                  <FontAwesomeIcon icon={faUserCircle} className="me-2" /> My
-                  Profile
+                  <Link to={"/myprofile"}>
+                    <FontAwesomeIcon icon={faUserCircle} className="me-2" /> My
+                    Profile
+                  </Link>
                 </Dropdown.Item>
                 <Dropdown.Item className="fw-bold">
                   <FontAwesomeIcon icon={faCog} className="me-2" /> Settings
@@ -141,7 +144,7 @@ export default (props) => {
               </Dropdown.Menu>
             </Dropdown>
             <div>
-              <IoIosArrowDown/>
+              <IoIosArrowDown />
             </div>
           </Nav>
         </div>
