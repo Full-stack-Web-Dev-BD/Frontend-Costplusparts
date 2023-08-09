@@ -132,7 +132,7 @@ const MaterialandQuestions = () => {
           </form>
           <h2 className="text-gray"> 2.More Options</h2>
           <div className="text-right">
-            <Link to="/job-zone/material">
+            <Link to="/myprofile">
               <button className="btn btn_cont">Continue</button>
             </Link>
           </div>

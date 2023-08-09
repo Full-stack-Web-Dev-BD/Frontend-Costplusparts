@@ -52,10 +52,13 @@ import Jobs from './Jobs/Jobs';
 import SceduleJobs from './Jobs/SceduleJobs';
 import { DashboardPage } from './dashboard/DashboardPage';
 import MaterialandQuestions from './Jobs/MaterialandQuestions';
-import Materials from './dashboard/JobsZone/Materials';
+// import Materials from './dashboard/JobsZone/Materials';
+// import UploadPart from './dashboard/JobsZone/UploadPart';
+// import Parts from './dashboard/JobsZone/Parts/Parts';
+import FileUpload from './dashboard/JobsZone/Upload/FileUpload'; 
+import ChooseService from './dashboard/JobsZone/Parts/ChooseService';
+import ProfileTabs from "./dashboard/JobsZone/ProfileTabs"
 import UploadPart from './dashboard/JobsZone/UploadPart';
-import Parts from './dashboard/JobsZone/Parts/Parts';
-import FileUpload from './dashboard/JobsZone/Upload/FileUpload';
 
 const RouteWithLoader = ({ component: Component, ...rest }) => {
   const [loaded, setLoaded] = useState(false);
@@ -124,9 +127,9 @@ export default () => (
     <RouteWithSidebar exact path={'/upload/file'} component={FileUpload} />
     <RouteWithSidebar exact path={'/scedule-job'} component={SceduleJobs} />
     <RouteWithSidebar exact path={'/material-and-questions'} component={MaterialandQuestions} />
-    <RouteWithSidebar exact path={'/job-zone/material'} component={Materials} />
-    <RouteWithSidebar exact path={'/upload/material'} component={UploadPart} />
-    <RouteWithSidebar exact path={'/parts'} component={Parts} />
+    <RouteWithSidebar exact path={'/myprofile'} component={ProfileTabs} />
+    <RouteWithSidebar exact path={'/parts'} component={UploadPart} />
+    <RouteWithSidebar exact path={'/chooseservice'} component={ChooseService} />
 
     
     {/* old */}

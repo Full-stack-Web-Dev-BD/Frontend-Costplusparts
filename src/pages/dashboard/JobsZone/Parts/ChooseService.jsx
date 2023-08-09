@@ -1,6 +1,6 @@
 import React from "react";
 
-const Parts = () => {
+const ChooseService = () => {
   return (
     <div className="container mt-5">
       <h3 className="text-center mb-4">Choose a service</h3>
@@ -45,4 +45,4 @@ const Parts = () => {
   );
 };
 
-export default Parts;
+export default ChooseService;
