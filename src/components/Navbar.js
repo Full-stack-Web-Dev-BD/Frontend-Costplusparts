@@ -23,8 +23,7 @@ import {
   ListGroup,
   InputGroup,
 } from "@themesberg/react-bootstrap";
-
-import { MdDarkMode, MdOutlineLightMode } from "react-icons/md";
+ 
 import NOTIFICATIONS_DATA from "../data/notifications";
 import Profile6 from "../assets/img/team/profile-picture-6.jpg";
 import ModeSwitch from "./ModeSwitch/ModeSwitch";

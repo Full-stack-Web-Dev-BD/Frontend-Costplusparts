@@ -59,6 +59,9 @@ import FileUpload from './dashboard/JobsZone/Upload/FileUpload';
 import ChooseService from './dashboard/JobsZone/Parts/ChooseService';
 import ProfileTabs from "./dashboard/JobsZone/ProfileTabs"
 import UploadPart from './dashboard/JobsZone/UploadPart';
+import { useDispatch } from 'react-redux';
+import { LOGIN_SUCCESS } from '../store/actions/actionTypes';
+import jwtDecode from 'jwt-decode';
 
 const RouteWithLoader = ({ component: Component, ...rest }) => {
   const [loaded, setLoaded] = useState(false);
@@ -75,12 +78,20 @@ const RouteWithLoader = ({ component: Component, ...rest }) => {
 
 const RouteWithSidebar = ({ component: Component, ...rest }) => {
   const [loaded, setLoaded] = useState(false);
-
+  const dispatch= useDispatch()
   useEffect(() => {
     const timer = setTimeout(() => setLoaded(true), 1000);
     return () => clearTimeout(timer);
   }, []);
 
+  useEffect(()=>{
+    if(window.localStorage.getItem("token")){
+      const token=  window.localStorage.getItem("token")
+      const decodedToken= jwtDecode(token)
+      dispatch({type:LOGIN_SUCCESS, payload: decodedToken.user })
+    }
+  })
+  
   const localStorageIsSettingsVisible = () => {
     return localStorage.getItem('settingsVisible') === 'false' ? false : true
   }
