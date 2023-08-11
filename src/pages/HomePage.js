@@ -62,6 +62,7 @@ import UploadPart from './dashboard/JobsZone/UploadPart';
 import { useDispatch } from 'react-redux';
 import { LOGIN_SUCCESS } from '../store/actions/actionTypes';
 import jwtDecode from 'jwt-decode';
+import { NotAuthenticated } from './examples/NotAuthenticated';
 
 const RouteWithLoader = ({ component: Component, ...rest }) => {
   const [loaded, setLoaded] = useState(false);
@@ -78,47 +79,62 @@ const RouteWithLoader = ({ component: Component, ...rest }) => {
 
 const RouteWithSidebar = ({ component: Component, ...rest }) => {
   const [loaded, setLoaded] = useState(false);
-  const dispatch= useDispatch()
+  const [authenticated, setAuthenticated] = useState(false);
+  const dispatch = useDispatch();
+
   useEffect(() => {
     const timer = setTimeout(() => setLoaded(true), 1000);
     return () => clearTimeout(timer);
   }, []);
 
-  useEffect(()=>{
-    if(window.localStorage.getItem("token")){
-      const token=  window.localStorage.getItem("token")
-      const decodedToken= jwtDecode(token)
-      dispatch({type:LOGIN_SUCCESS, payload: decodedToken.user })
+  useEffect(() => {
+    const token = window.localStorage.getItem('token');
+    if (token) {
+      const decodedToken = jwtDecode(token);
+      dispatch({ type: LOGIN_SUCCESS, payload: decodedToken.user });
+      setAuthenticated(true); // Set authentication status
     }
-  })
-  
+  }, [dispatch]);
+
   const localStorageIsSettingsVisible = () => {
-    return localStorage.getItem('settingsVisible') === 'false' ? false : true
-  }
+    return localStorage.getItem('settingsVisible') === 'false' ? false : true;
+  };
 
   const [showSettings, setShowSettings] = useState(localStorageIsSettingsVisible);
 
   const toggleSettings = () => {
     setShowSettings(!showSettings);
     localStorage.setItem('settingsVisible', !showSettings);
-  }
+  };
 
   return (
-    <Route {...rest} render={props => (
-      <>
-        <Preloader show={loaded ? false : true} />
-        <Sidebar />
+    <Route
+      {...rest}
+      render={props =>
+        loaded ? ( // Check if loaded
+          authenticated ? ( // Check if authenticated
+            <>
+              <Sidebar />
 
-        <main className="content">
-          <Navbar />
-          <Component {...props} />
-          <Footer toggleSettings={toggleSettings} showSettings={showSettings} />
-        </main>
-      </>
-    )}
+              <main className="content">
+                <Navbar />
+                <Component {...props} />
+                <Footer toggleSettings={toggleSettings} showSettings={showSettings} />
+              </main>
+            </>
+          ) : (
+            <div>
+              <NotAuthenticated/>
+            </div>
+          )
+        ) : (
+          <Preloader show={true} />
+        )
+      }
     />
   );
 };
+ 
 
 export default () => (
   <Switch>
