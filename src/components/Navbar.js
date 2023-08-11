@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { IoIosArrowDown } from 'react-icons/io'
+import { IoIosArrowDown } from "react-icons/io";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import {
@@ -23,14 +23,20 @@ import {
   ListGroup,
   InputGroup,
 } from "@themesberg/react-bootstrap";
- 
+
 import NOTIFICATIONS_DATA from "../data/notifications";
 import Profile6 from "../assets/img/team/profile-picture-6.jpg";
 import ModeSwitch from "./ModeSwitch/ModeSwitch";
+import { logout } from "../store/actions/authActions";
+import { useDispatch } from "react-redux";
 
 export default (props) => {
   const [notifications, setNotifications] = useState(NOTIFICATIONS_DATA);
   const [isDark, setisDark] = useState(false);
+  const dispatch= useDispatch()
+  const logoutFrom= ()=>{
+    dispatch(logout())
+  }
 
   const areNotificationsRead = notifications.reduce(
     (acc, notif) => acc && notif.read,
@@ -88,10 +94,8 @@ export default (props) => {
               </Form.Group>
             </Form>
           </div>
-          <Nav className="align-items-center" >
-            <div
-              style={{ marginRight: "45px" }}
-            >
+          <Nav className="align-items-center">
+            <div style={{ marginRight: "45px" }}>
               <ModeSwitch />
             </div>
             <Dropdown as={Nav.Item}>
@@ -123,22 +127,21 @@ export default (props) => {
                   <FontAwesomeIcon icon={faCog} className="me-2" /> Settings
                 </Dropdown.Item>
                 <Dropdown.Item className="fw-bold">
-                  <FontAwesomeIcon icon={faEnvelopeOpen} className="me-2" />{" "}
+                  <FontAwesomeIcon icon={faEnvelopeOpen} className="me-2" />
                   Messages
                 </Dropdown.Item>
                 <Dropdown.Item className="fw-bold">
-                  <FontAwesomeIcon icon={faUserShield} className="me-2" />{" "}
+                  <FontAwesomeIcon icon={faUserShield} className="me-2" />
                   Support
                 </Dropdown.Item>
-
                 <Dropdown.Divider />
-
-                <Dropdown.Item className="fw-bold">
+                <Dropdown.Item  className="fw-bold">
+                  <div onClick={e=> logoutFrom() }>
                   <FontAwesomeIcon
                     icon={faSignOutAlt}
                     className="text-danger me-2"
-                  />{" "}
-                  Logout
+                  />
+                  Logout</div>
                 </Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>

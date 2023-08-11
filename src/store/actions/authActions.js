@@ -26,10 +26,10 @@ export const login = (email, password) => async (dispatch) => {
     // dispatch({ type: "LOGIN_FAILURE", payload: error.response.data.errors });
   }
 };
-
 export const logout = () => (dispatch) => {
-  // Perform any necessary cleanup, e.g., invalidate tokens on the server
+  window.localStorage.removeItem("token")
   dispatch({ type: "LOGOUT" });
+  window.location.href="/#/sign-in"
 };
 
 export const signup =
