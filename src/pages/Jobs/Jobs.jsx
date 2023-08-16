@@ -7,15 +7,15 @@ const Jobs = () => {
     <div className="container">
       <div className="row mt-5">
         <div className="col-md-4 cp">
-          <div className="sc_job">
-            <Link to={"/scedule-job"}>
+          <Link to={"/scedule-job"}>
+            <div className="sc_job">
               <div className="sc_jobs_content tex-center">
                 <AiOutlinePlus />
                 <br />
                 <span>Scedule A Job</span>
               </div>
-            </Link>
-          </div>
+            </div>
+          </Link>
         </div>
 
         <div className="col-md-4">

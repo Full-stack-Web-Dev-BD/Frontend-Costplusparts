@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { Card } from "@mui/material";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
-import { Link } from "react-router-dom";
 const MaterialandQuestions = () => {
+  const [materialCount, setmaterialCount] = useState(10);
+  const decreaseMaterialCount = () => {
+    if (materialCount > 0) {
+      setmaterialCount(materialCount - 1);
+    }
+  }; 
   return (
     <div className="p-4 mt-4">
       <Card className="p-4">
@@ -113,18 +118,24 @@ const MaterialandQuestions = () => {
               <div class="col-sm-2">
                 <div className="row" style={{ alignItems: "center" }}>
                   <div className="text-center col-md-4">
-                    <AiOutlineMinus className="cp" />{" "}
+                    <button className="btn"
+                      onClick={(e) => {decreaseMaterialCount()
+                      }}
+                    >
+                      <AiOutlineMinus className="cp" />
+                    </button>
                   </div>
                   <div className=" col-md-4">
-                    {" "}
                     <input
+                      value={materialCount}
                       className="form-control"
-                      style={{ borderRadius: "0px" }}
-                    />{" "}
+                      style={{ borderRadius: "0px", textAlign:'center' }}
+                    />
                   </div>
                   <div className="text-center col-md-4">
-                    {" "}
-                    <AiOutlinePlus className="cp" />{" "}
+                    <button className="btn" onClick={(e) => setmaterialCount(materialCount+1)}>
+                      <AiOutlinePlus className="cp" />
+                    </button>
                   </div>
                 </div>
               </div>
@@ -132,9 +143,7 @@ const MaterialandQuestions = () => {
           </form>
           <h2 className="text-gray"> 2.More Options</h2>
           <div className="text-right">
-            <Link to="/myprofile">
-              <button className="btn btn_cont">Continue</button>
-            </Link>
+            <button className="btn btn_cont">Finish</button>
           </div>
         </Card>
       </div>

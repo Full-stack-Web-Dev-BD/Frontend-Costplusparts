@@ -12,11 +12,16 @@
     margin-top: 20px;
     background-color: #161842;
 }
-.scedule_jobs span{
+
+.scedule_jobs span {
     width: 60%;
     text-align: center;
     border: 1px solid #1C1919;
     border-radius: 3px;
     font-size: 26px;
     margin-top: 10px;
+}
+
+.job_input {
+    border-radius: 4px;
 }

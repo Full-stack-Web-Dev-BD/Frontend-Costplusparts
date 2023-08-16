@@ -1,16 +1,30 @@
-import React from "react";
-import "./sceduleJob.css"
+import React, { useState } from "react";
+import "./sceduleJob.css";
 import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const SceduleJobs = () => {
+  const [title, settitle] = useState("");
   return (
     <div className="container">
       <div className="scedule_jobs">
         <h3>Schedule your job</h3>
-        <span>Job</span>
-        <Link to={"/material-and-questions"}>
-        <button className="btn">Continue</button>
-        </Link>
+        <span>
+          <input
+            placeholder="Enter Job Title"
+            onChange={(e) => settitle(e.target.value)}
+            className="form-control job_input"
+          />
+        </span>
+        {title ? (
+          <Link to={`/upload-file/${title}`}>
+            <button className="btn">Continue</button>
+          </Link>
+        ) : (
+          <button className="btn " onClick={e=>toast.error("Title Required")} title="Title Requried">
+            Continue
+          </button>
+        )}
       </div>
     </div>
   );

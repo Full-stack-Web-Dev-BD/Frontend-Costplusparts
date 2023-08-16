@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const FileUpload = () => {
   const [isDragging, setIsDragging] = useState(false);
@@ -63,7 +64,9 @@ const FileUpload = () => {
         </div>
       </div>
       <div className="text-center">
+        <Link to="/material-and-questions/title/upload_ID">
         <button className="btn btn-cont common_button">Continue</button>
+        </Link>
       </div>
     </div>
     </div>

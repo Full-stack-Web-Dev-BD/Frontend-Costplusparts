@@ -149,11 +149,12 @@ export default () => (
 
     {/* pages */}
     <RouteWithSidebar exact path={Routes.Dashboard.path} component={DashboardPage} />
-    {/* Jobs */}
-    <RouteWithSidebar exact path={Routes.Jobs.path} component={Jobs} />
-    <RouteWithSidebar exact path={'/upload/file'} component={FileUpload} />
+    {/* Jobs Flow -> New Job -> Enter job title -> Upload your CAD file -> Material and Questions (CAD render & analysis) */}
+    <RouteWithSidebar exact path={'/jobs'} component={Jobs} />
     <RouteWithSidebar exact path={'/scedule-job'} component={SceduleJobs} />
-    <RouteWithSidebar exact path={'/material-and-questions'} component={MaterialandQuestions} />
+    <RouteWithSidebar exact path={'/upload-file/:title'} component={FileUpload} />
+    <RouteWithSidebar exact path={'/material-and-questions/:title/:uploadID'} component={MaterialandQuestions} />
+    
     <RouteWithSidebar exact path={'/myprofile'} component={ProfileTabs} />
     <RouteWithSidebar exact path={'/parts'} component={UploadPart} />
     <RouteWithSidebar exact path={'/chooseservice'} component={ChooseService} />
