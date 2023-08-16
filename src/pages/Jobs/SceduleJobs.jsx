@@ -12,16 +12,23 @@ const SceduleJobs = () => {
         <span>
           <input
             placeholder="Enter Job Title"
-            onChange={(e) => settitle(e.target.value)}
+            onChange={(e) => {
+              settitle(e.target.value);
+              window.localStorage.setItem("jobTitle", e.target.value);
+            }}
             className="form-control job_input"
           />
         </span>
         {title ? (
-          <Link to={`/upload-file/${title}`}>
+          <Link to={`/upload-file`}>
             <button className="btn">Continue</button>
           </Link>
         ) : (
-          <button className="btn " onClick={e=>toast.error("Title Required")} title="Title Requried">
+          <button
+            className="btn "
+            onClick={(e) => toast.error("Title Required")}
+            title="Title Requried"
+          >
             Continue
           </button>
         )}

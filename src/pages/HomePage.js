@@ -152,7 +152,7 @@ export default () => (
     {/* Jobs Flow -> New Job -> Enter job title -> Upload your CAD file -> Material and Questions (CAD render & analysis) */}
     <RouteWithSidebar exact path={'/jobs'} component={Jobs} />
     <RouteWithSidebar exact path={'/scedule-job'} component={SceduleJobs} />
-    <RouteWithSidebar exact path={'/upload-file/:title'} component={FileUpload} />
+    <RouteWithSidebar exact path={'/upload-file'} component={FileUpload} />
     <RouteWithSidebar exact path={'/material-and-questions/:title/:uploadID'} component={MaterialandQuestions} />
     
     <RouteWithSidebar exact path={'/myprofile'} component={ProfileTabs} />
