@@ -209,7 +209,7 @@ const ProfileTab = ({ auth }) => {
                   </div>
                   <div className="col-md-12 mb-4">
                     <label className=" m-0">Confirm New Password</label>
-                    <input className="form-control" placeholder="First Name" />
+                    <input className="form-control" placeholder="Confirm Password" />
                   </div>
                 </div>
                 <div className=" text-right update_profile">

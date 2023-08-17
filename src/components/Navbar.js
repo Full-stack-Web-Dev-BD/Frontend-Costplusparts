@@ -28,15 +28,15 @@ import NOTIFICATIONS_DATA from "../data/notifications";
 import Profile6 from "../assets/img/team/profile-picture-6.jpg";
 import ModeSwitch from "./ModeSwitch/ModeSwitch";
 import { logout } from "../store/actions/authActions";
-import { useDispatch } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 
-export default (props) => {
+const CustomNavbar = ({ auth }) => {
   const [notifications, setNotifications] = useState(NOTIFICATIONS_DATA);
   const [isDark, setisDark] = useState(false);
-  const dispatch= useDispatch()
-  const logoutFrom= ()=>{
-    dispatch(logout())
-  }
+  const dispatch = useDispatch();
+  const logoutFrom = () => {
+    dispatch(logout());
+  };
 
   const areNotificationsRead = notifications.reduce(
     (acc, notif) => acc && notif.read,
@@ -105,7 +105,9 @@ export default (props) => {
                   style={{ gap: "10px" }}
                 >
                   <div className="media-body ms-2 text-dark align-items-center d-none d-lg-block">
-                    <span> Fabricio Guardia </span>
+                    <span>
+                      {auth.user.firstname + " " + auth.user.lastname}
+                    </span>
                     <br />
                     <span className="mb-0 font-small fw-bold">Individual</span>
                     <br />
@@ -135,13 +137,14 @@ export default (props) => {
                   Support
                 </Dropdown.Item>
                 <Dropdown.Divider />
-                <Dropdown.Item  className="fw-bold">
-                  <div onClick={e=> logoutFrom() }>
-                  <FontAwesomeIcon
-                    icon={faSignOutAlt}
-                    className="text-danger me-2"
-                  />
-                  Logout</div>
+                <Dropdown.Item className="fw-bold">
+                  <div onClick={(e) => logoutFrom()}>
+                    <FontAwesomeIcon
+                      icon={faSignOutAlt}
+                      className="text-danger me-2"
+                    />
+                    Logout
+                  </div>
                 </Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
@@ -154,3 +157,9 @@ export default (props) => {
     </Navbar>
   );
 };
+const mapStateToProps = (state) => {
+  return {
+    auth: state.auth,
+  };
+};
+export default connect(mapStateToProps, null)(CustomNavbar);
