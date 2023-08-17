@@ -52,6 +52,10 @@ const ProfileTab = ({ auth }) => {
   const [country, setcountry] = useState(auth.user.country);
   const [phone, setphone] = useState(auth.user.phone);
   const [postalCode, setpostalCode] = useState(auth.user.postalCode);
+  // password update
+  const [password, setpassword] = useState("");
+  const [newPassword, setnewPassword] = useState("");
+  const [confirmPassword, setconfirmPassword] = useState("");
 
   const [value, setValue] = React.useState(0);
   const handleChange = (event, newValue) => {
@@ -77,6 +81,35 @@ const ProfileTab = ({ auth }) => {
     } catch (error) {
       console.log(error);
       toast.error("Error while updating user profile");
+    }
+  };
+
+  const updatePassword = async () => {
+    if ((!password, !newPassword, !confirmPassword)) {
+      toast.error("Please Fill the form and try again");
+    } else if (newPassword.length < 8) {
+      toast.error("Please enter at least 8 characters");
+    } else if (newPassword !== confirmPassword) {
+      toast.error(
+        "Both password are not similar (New password/Confirm Password"
+      );
+    } else {
+      const data = {
+        currentPassword: password,
+        newPassword: newPassword,
+      };
+      try {
+        const response = await axios.put(
+          `${BASE_URL}/api/auth/update-password/${auth.user._id}`,
+          data
+        );
+        toast.success("Password updated successfully");
+      } catch (error) {
+        const allError = error.response?.data;
+        allError.errors.forEach((error) => {
+          toast.error(error.msg);
+        });
+      }
     }
   };
 
@@ -201,19 +234,37 @@ const ProfileTab = ({ auth }) => {
                 <div className="row">
                   <div className="col-md-12 mb-4">
                     <label className=" m-0">Old Password</label>
-                    <input className="form-control" placeholder="" />
+                    <input
+                      type="password"
+                      onChange={(e) => setpassword(e.target.value)}
+                      name="password"
+                      className="form-control"
+                      placeholder="Old Password"
+                    />
                   </div>
                   <div className="col-md-12 mb-4">
                     <label className=" m-0">New Password (8+ characters)</label>
-                    <input className="form-control" placeholder="" />
+                    <input
+                      onChange={(e) => setnewPassword(e.target.value)}
+                      type="password"
+                      className="form-control"
+                      placeholder="New Password"
+                    />
                   </div>
                   <div className="col-md-12 mb-4">
                     <label className=" m-0">Confirm New Password</label>
-                    <input className="form-control" placeholder="Confirm Password" />
+                    <input
+                      onChange={(e) => setconfirmPassword(e.target.value)}
+                      type="password"
+                      className="form-control"
+                      placeholder="Confirm Password"
+                    />
                   </div>
                 </div>
                 <div className=" text-right update_profile">
-                  <button className="btn btn">Change</button>
+                  <button className="btn btn" onClick={(e) => updatePassword()}>
+                    Change
+                  </button>
                 </div>
               </Card>
             </div>
