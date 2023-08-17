@@ -45,6 +45,7 @@
     "chartist-plugin-tooltips-updated": "^0.1.4",
     "faker": "^6.6.6",
     "jwt-decode": "^3.1.2",
+    "moment": "^2.29.4",
     "moment-timezone": "^0.5.31",
     "query-string": "^8.1.0",
     "react": "^16.13.1",
@@ -63,11 +64,14 @@
     "react-router-dom": "^5.2.0",
     "react-router-hash-link": "^2.3.1",
     "react-scripts": "3.4.3",
+    "react-stl-viewer": "^2.2.5",
+    "react-three-fiber": "^6.0.13",
     "react-transition-group": "^4.4.1",
     "redux": "^4.2.1",
     "redux-thunk": "^2.4.2",
     "sass": "^1.50.0",
-    "simplebar-react": "^2.3.0"
+    "simplebar-react": "^2.3.0",
+    "three": "^0.155.0"
   },
   "scripts": {
     "start": "react-scripts --openssl-legacy-provider start",

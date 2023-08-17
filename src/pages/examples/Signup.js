@@ -8,9 +8,7 @@ import { Link } from 'react-router-dom';
 import { CountryDropdown, RegionDropdown, CountryRegionData } from 'react-country-region-selector';
 
 import { Routes } from "../../routes";
-import BgImage from "../../assets/img/illustrations/signin.svg";
 import Logo from "../../assets/img/logo.svg";
-import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { signup } from '../../store/actions/authActions';

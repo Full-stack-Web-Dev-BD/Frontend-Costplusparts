@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { Routes } from "../routes";
 
@@ -48,21 +48,23 @@ import Tables from "./components/Tables";
 import Tabs from "./components/Tabs";
 import Tooltips from "./components/Tooltips";
 import Toasts from "./components/Toasts";
-import Jobs from './Jobs/Jobs';
-import SceduleJobs from './Jobs/SceduleJobs';
-import { DashboardPage } from './dashboard/DashboardPage';
-import MaterialandQuestions from './Jobs/MaterialandQuestions';
+import Jobs from "./Jobs/Jobs";
+import SceduleJobs from "./Jobs/SceduleJobs";
+import { DashboardPage } from "./dashboard/DashboardPage";
+import MaterialandQuestions from "./Jobs/MaterialandQuestions";
 // import Materials from './dashboard/JobsZone/Materials';
 // import UploadPart from './dashboard/JobsZone/UploadPart';
 // import Parts from './dashboard/JobsZone/Parts/Parts';
-import FileUpload from './dashboard/JobsZone/Upload/FileUpload'; 
-import ChooseService from './dashboard/JobsZone/Parts/ChooseService';
-import ProfileTabs from "./dashboard/JobsZone/ProfileTabs"
-import UploadPart from './dashboard/JobsZone/UploadPart';
-import { useDispatch } from 'react-redux';
-import { LOGIN_SUCCESS } from '../store/actions/actionTypes';
-import jwtDecode from 'jwt-decode';
-import { NotAuthenticated } from './examples/NotAuthenticated';
+import FileUpload from "./dashboard/JobsZone/Upload/FileUpload";
+import ChooseService from "./dashboard/JobsZone/Parts/ChooseService";
+import ProfileTabs from "./dashboard/JobsZone/ProfileTabs";
+import UploadPart from "./dashboard/JobsZone/UploadPart";
+import { connect, useDispatch } from "react-redux";
+import { LOGIN_SUCCESS, SET_USER } from "../store/actions/actionTypes";
+import jwtDecode from "jwt-decode";
+import { NotAuthenticated } from "./examples/NotAuthenticated";
+import axios from "axios";
+import { BASE_URL } from "../utils/constant";
 
 const RouteWithLoader = ({ component: Component, ...rest }) => {
   const [loaded, setLoaded] = useState(false);
@@ -73,7 +75,15 @@ const RouteWithLoader = ({ component: Component, ...rest }) => {
   }, []);
 
   return (
-    <Route {...rest} render={props => ( <> <Preloader show={loaded ? false : true} /> <Component {...props} /> </> ) } />
+    <Route
+      {...rest}
+      render={(props) => (
+        <>
+          {" "}
+          <Preloader show={loaded ? false : true} /> <Component {...props} />{" "}
+        </>
+      )}
+    />
   );
 };
 
@@ -81,50 +91,66 @@ const RouteWithSidebar = ({ component: Component, ...rest }) => {
   const [loaded, setLoaded] = useState(false);
   const [authenticated, setAuthenticated] = useState(false);
   const dispatch = useDispatch();
-
   useEffect(() => {
     const timer = setTimeout(() => setLoaded(true), 1000);
     return () => clearTimeout(timer);
   }, []);
-
-  useEffect(() => {
-    const token = window.localStorage.getItem('token');
-    if (token) {
-      const decodedToken = jwtDecode(token);
-      dispatch({ type: LOGIN_SUCCESS, payload: decodedToken.user });
-      setAuthenticated(true); // Set authentication status
+  const fetchUser = async (userID) => {
+    if (!userID) {
+      return {};
     }
+    const response = await axios.get(`${BASE_URL}/api/users/${userID}`);
+    return response.data;
+  };
+  useEffect(() => {
+    const initApp = async () => {
+      const token = window.localStorage.getItem("token");
+      if (token) {
+        const decodedToken = jwtDecode(token);
+        dispatch({ type: LOGIN_SUCCESS, payload: decodedToken.user });
+        setAuthenticated(true);
+        if (decodedToken?.user?.id) {
+          const userDetails = await fetchUser(decodedToken?.user?.id);
+        dispatch({ type: SET_USER, payload: userDetails });
+        }
+      }
+    };
+    initApp();
   }, [dispatch]);
 
   const localStorageIsSettingsVisible = () => {
-    return localStorage.getItem('settingsVisible') === 'false' ? false : true;
+    return localStorage.getItem("settingsVisible") === "false" ? false : true;
   };
 
-  const [showSettings, setShowSettings] = useState(localStorageIsSettingsVisible);
+  const [showSettings, setShowSettings] = useState(
+    localStorageIsSettingsVisible
+  );
 
   const toggleSettings = () => {
     setShowSettings(!showSettings);
-    localStorage.setItem('settingsVisible', !showSettings);
+    localStorage.setItem("settingsVisible", !showSettings);
   };
 
   return (
     <Route
       {...rest}
-      render={props =>
+      render={(props) =>
         loaded ? ( // Check if loaded
           authenticated ? ( // Check if authenticated
             <>
               <Sidebar />
-
               <main className="content">
                 <Navbar />
                 <Component {...props} />
-                <Footer toggleSettings={toggleSettings} showSettings={showSettings} />
+                <Footer
+                  toggleSettings={toggleSettings}
+                  showSettings={showSettings}
+                />
               </main>
             </>
           ) : (
             <div>
-              <NotAuthenticated/>
+              <NotAuthenticated />
             </div>
           )
         ) : (
@@ -134,50 +160,95 @@ const RouteWithSidebar = ({ component: Component, ...rest }) => {
     />
   );
 };
- 
-
 export default () => (
   <Switch>
     <RouteWithLoader exact path={Routes.Home.path} component={Home} />
     <RouteWithLoader exact path={Routes.Signin.path} component={Signin} />
     <RouteWithLoader exact path={Routes.Signup.path} component={Signup} />
-    <RouteWithLoader exact path={Routes.ForgotPassword.path} component={ForgotPassword} />
-    <RouteWithLoader exact path={Routes.ResetPassword.path} component={ResetPassword} />
+    <RouteWithLoader
+      exact
+      path={Routes.ForgotPassword.path}
+      component={ForgotPassword}
+    />
+    <RouteWithLoader
+      exact
+      path={Routes.ResetPassword.path}
+      component={ResetPassword}
+    />
     <RouteWithLoader exact path={Routes.Lock.path} component={Lock} />
-    <RouteWithLoader exact path={Routes.NotFound.path} component={NotFoundPage} />
-    <RouteWithLoader exact path={Routes.ServerError.path} component={ServerError} />
+    <RouteWithLoader
+      exact
+      path={Routes.NotFound.path}
+      component={NotFoundPage}
+    />
+    <RouteWithLoader
+      exact
+      path={Routes.ServerError.path}
+      component={ServerError}
+    />
 
     {/* pages */}
-    <RouteWithSidebar exact path={Routes.Dashboard.path} component={DashboardPage} />
+    <RouteWithSidebar
+      exact
+      path={Routes.Dashboard.path}
+      component={DashboardPage}
+    />
     {/* Jobs Flow -> New Job -> Enter job title -> Upload your CAD file -> Material and Questions (CAD render & analysis) */}
-    <RouteWithSidebar exact path={'/jobs'} component={Jobs} />
-    <RouteWithSidebar exact path={'/scedule-job'} component={SceduleJobs} />
-    <RouteWithSidebar exact path={'/upload-file'} component={FileUpload} />
-    <RouteWithSidebar exact path={'/material-and-questions/:title/:uploadID'} component={MaterialandQuestions} />
-    
-    <RouteWithSidebar exact path={'/myprofile'} component={ProfileTabs} />
-    <RouteWithSidebar exact path={'/parts'} component={UploadPart} />
-    <RouteWithSidebar exact path={'/chooseservice'} component={ChooseService} />
+    <RouteWithSidebar exact path={"/jobs"} component={Jobs} />
+    <RouteWithSidebar exact path={"/scedule-job"} component={SceduleJobs} />
+    <RouteWithSidebar exact path={"/upload-file"} component={FileUpload} />
+    <RouteWithSidebar
+      exact
+      path={"/material-and-questions"}
+      component={MaterialandQuestions}
+    />
 
-    
+    <RouteWithSidebar exact path={"/myprofile"} component={ProfileTabs} />
+    <RouteWithSidebar exact path={"/parts"} component={UploadPart} />
+    <RouteWithSidebar exact path={"/chooseservice"} component={ChooseService} />
+
     {/* old */}
-    <RouteWithSidebar exact path={Routes.DashboardOverview.path} component={DashboardPage} />
+    <RouteWithSidebar
+      exact
+      path={Routes.DashboardOverview.path}
+      component={DashboardPage}
+    />
     <RouteWithSidebar exact path={Routes.Upgrade.path} component={Upgrade} />
-    <RouteWithSidebar exact path={Routes.Transactions.path} component={Transactions} />
+    <RouteWithSidebar
+      exact
+      path={Routes.Transactions.path}
+      component={Transactions}
+    />
     <RouteWithSidebar exact path={Routes.Settings.path} component={Settings} />
-    <RouteWithSidebar exact path={Routes.BootstrapTables.path} component={BootstrapTables} />
+    <RouteWithSidebar
+      exact
+      path={Routes.BootstrapTables.path}
+      component={BootstrapTables}
+    />
 
     {/* components */}
-    <RouteWithSidebar exact path={Routes.Accordions.path} component={Accordion} />
+    <RouteWithSidebar
+      exact
+      path={Routes.Accordions.path}
+      component={Accordion}
+    />
     <RouteWithSidebar exact path={Routes.Alerts.path} component={Alerts} />
     <RouteWithSidebar exact path={Routes.Badges.path} component={Badges} />
-    <RouteWithSidebar exact path={Routes.Breadcrumbs.path} component={Breadcrumbs} />
+    <RouteWithSidebar
+      exact
+      path={Routes.Breadcrumbs.path}
+      component={Breadcrumbs}
+    />
     <RouteWithSidebar exact path={Routes.Buttons.path} component={Buttons} />
     <RouteWithSidebar exact path={Routes.Forms.path} component={Forms} />
     <RouteWithSidebar exact path={Routes.Modals.path} component={Modals} />
     <RouteWithSidebar exact path={Routes.Navs.path} component={Navs} />
     <RouteWithSidebar exact path={Routes.Navbars.path} component={Navbars} />
-    <RouteWithSidebar exact path={Routes.Pagination.path} component={Pagination} />
+    <RouteWithSidebar
+      exact
+      path={Routes.Pagination.path}
+      component={Pagination}
+    />
     <RouteWithSidebar exact path={Routes.Popovers.path} component={Popovers} />
     <RouteWithSidebar exact path={Routes.Progress.path} component={Progress} />
     <RouteWithSidebar exact path={Routes.Tables.path} component={Tables} />
@@ -186,13 +257,41 @@ export default () => (
     <RouteWithSidebar exact path={Routes.Toasts.path} component={Toasts} />
 
     {/* documentation */}
-    <RouteWithSidebar exact path={Routes.DocsOverview.path} component={DocsOverview} />
-    <RouteWithSidebar exact path={Routes.DocsDownload.path} component={DocsDownload} />
-    <RouteWithSidebar exact path={Routes.DocsQuickStart.path} component={DocsQuickStart} />
-    <RouteWithSidebar exact path={Routes.DocsLicense.path} component={DocsLicense} />
-    <RouteWithSidebar exact path={Routes.DocsFolderStructure.path} component={DocsFolderStructure} />
-    <RouteWithSidebar exact path={Routes.DocsBuild.path} component={DocsBuild} />
-    <RouteWithSidebar exact path={Routes.DocsChangelog.path} component={DocsChangelog} />
+    <RouteWithSidebar
+      exact
+      path={Routes.DocsOverview.path}
+      component={DocsOverview}
+    />
+    <RouteWithSidebar
+      exact
+      path={Routes.DocsDownload.path}
+      component={DocsDownload}
+    />
+    <RouteWithSidebar
+      exact
+      path={Routes.DocsQuickStart.path}
+      component={DocsQuickStart}
+    />
+    <RouteWithSidebar
+      exact
+      path={Routes.DocsLicense.path}
+      component={DocsLicense}
+    />
+    <RouteWithSidebar
+      exact
+      path={Routes.DocsFolderStructure.path}
+      component={DocsFolderStructure}
+    />
+    <RouteWithSidebar
+      exact
+      path={Routes.DocsBuild.path}
+      component={DocsBuild}
+    />
+    <RouteWithSidebar
+      exact
+      path={Routes.DocsChangelog.path}
+      component={DocsChangelog}
+    />
 
     <Redirect to={Routes.NotFound.path} />
   </Switch>

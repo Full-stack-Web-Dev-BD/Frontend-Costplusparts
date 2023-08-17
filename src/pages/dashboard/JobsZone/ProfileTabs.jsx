@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
@@ -7,6 +7,10 @@ import Box from "@mui/material/Box";
 import { AiOutlinePlus } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { Card } from "@mui/material";
+import { connect } from "react-redux";
+import axios from "axios";
+import { BASE_URL } from "../../../utils/constant";
+import toast from "react-hot-toast";
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -41,18 +45,46 @@ function a11yProps(index) {
   };
 }
 
-export default function ProfileTabs() {
-  const [value, setValue] = React.useState(0);
+const ProfileTab = ({ auth }) => {
+  const [firstname, setfirstname] = useState(auth.user.firstname);
+  const [lastname, setlastname] = useState(auth.user.lastname);
+  const [company, setcompany] = useState(auth.user.company);
+  const [country, setcountry] = useState(auth.user.country);
+  const [phone, setphone] = useState(auth.user.phone);
+  const [postalCode, setpostalCode] = useState(auth.user.postalCode);
 
+  const [value, setValue] = React.useState(0);
   const handleChange = (event, newValue) => {
     setValue(newValue);
+  };
+
+  const updateUserProfile = async () => {
+    const data = {
+      firstname,
+      lastname,
+      company,
+      country,
+      phone,
+      postalCode,
+    };
+    try {
+      const response = await axios.put(
+        `${BASE_URL}/api/users/${auth.user._id}`,
+        data
+      );
+      console.log(response);
+      toast.success("User profile updated successfully !!!");
+    } catch (error) {
+      console.log(error);
+      toast.error("Error while updating user profile");
+    }
   };
 
   return (
     <Box sx={{ width: "100%", marginTop: "30px" }}>
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
         <div className="job_tab_wrap">
-          <h4>Fabricio Guardia</h4>
+          <h4 onClick={(e) => console.log(auth)}>Fabricio Guardia</h4>
           <Tabs
             value={value}
             onChange={handleChange}
@@ -71,41 +103,87 @@ export default function ProfileTabs() {
           <div className="row">
             <div className="col-md-6">
               <Card className="p-4">
-                <div className=" mb-4">
-                  <h4>Profile Details</h4>
-                </div>
-                <div className="row">
-                  <div className="col-md-6 mb-4">
-                    <label className=" m-0">First Name</label>
-                    <input className="form-control" placeholder="" />
+                <p>
+                  <div className=" mb-4">
+                    <Typography variant="h4">Profile Details</Typography>
                   </div>
-                  <div className="col-md-6 mb-4">
-                    <label className=" m-0">Last Name</label>
-                    <input className="form-control" placeholder="" />
+                </p>
+                <p>
+                  <div className="row">
+                    <div className="col-md-6 mb-4">
+                      <label className=" m-0">First Name</label>
+                      <input
+                        value={firstname}
+                        onChange={(e) => setfirstname(e.target.value)}
+                        style={{ textTransform: "capitalize" }}
+                        className="form-control"
+                        placeholder=""
+                      />
+                    </div>
+                    <div className="col-md-6 mb-4">
+                      <label className=" m-0">Last Name</label>
+                      <input
+                        value={lastname}
+                        onChange={(e) => setlastname(e.target.value)}
+                        style={{ textTransform: "capitalize" }}
+                        className="form-control"
+                        placeholder=""
+                      />
+                    </div>
+                    <div className="col-md-12 mb-4">
+                      <label className=" m-0">Company</label>
+                      <input
+                        value={company}
+                        onChange={(e) => setcompany(e.target.value)}
+                        style={{ textTransform: "capitalize" }}
+                        className="form-control"
+                        placeholder=""
+                      />
+                    </div>
+                    <div className="col-md-12 mb-4">
+                      <label className=" m-0">Country</label>
+                      <select
+                        onChange={(e) => setcountry(e.target.value)}
+                        style={{ textTransform: "capitalize" }}
+                        className="form-control"
+                      >
+                        <option value={country}> {auth.user.country} </option>
+                        <option>Bangladesh</option>
+                        <option>India</option>
+                        <option>United States of America</option>
+                      </select>
+                    </div>
+                    <div className="col-md-12 mb-4">
+                      <label className=" m-0">Phone Number</label>
+                      <input
+                        type="number"
+                        value={phone}
+                        onChange={(e) => setphone(e.target.value)}
+                        style={{ textTransform: "capitalize" }}
+                        className="form-control"
+                        placeholder=""
+                      />
+                    </div>
+                    <div className="col-md-12 mb-4">
+                      <label className=" m-0">Postal Code</label>
+                      <input
+                        value={postalCode}
+                        onChange={(e) => setpostalCode(e.target.value)}
+                        style={{ textTransform: "capitalize" }}
+                        className="form-control"
+                        type="number"
+                        placeholder="Polstal Code"
+                      />
+                    </div>
                   </div>
-                  <div className="col-md-12 mb-4">
-                    <label className=" m-0">Company</label>
-                    <input className="form-control" placeholder="" />
-                  </div>
-                  <div className="col-md-12 mb-4">
-                    <label className=" m-0">Country</label>
-                    <select className="form-control">
-                      <option>United States of America</option>
-                      <option>United States of America</option>
-                      <option>United States of America</option>
-                    </select>
-                  </div>
-                  <div className="col-md-12 mb-4">
-                    <label className=" m-0">Phone Number</label>
-                    <input className="form-control" placeholder="" />
-                  </div>
-                  <div className="col-md-12 mb-4">
-                    <label className=" m-0">Postal Code</label>
-                    <input className="form-control" placeholder="First Name" />
-                  </div>
-                </div>
+                </p>
                 <div className=" text-right update_profile">
-                  <button className="btn btn">Update Profile</button>
+                  <button
+                    className="btn btn"
+                    onClick={(e) => updateUserProfile()}
+                  >
+                    Update Profile
+                  </button>
                 </div>
               </Card>
             </div>
@@ -197,4 +275,12 @@ export default function ProfileTabs() {
       </CustomTabPanel>
     </Box>
   );
-}
+};
+
+const mapStateToProps = (state) => {
+  return {
+    auth: state.auth,
+  };
+};
+
+export default connect(mapStateToProps, null)(ProfileTab);

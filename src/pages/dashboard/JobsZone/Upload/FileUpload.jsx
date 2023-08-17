@@ -17,21 +17,19 @@ const FileUpload = () => {
       toast("File uploaded");
       console.log(response?.data?.filename)
       setUploadedFile(response?.data?.filename)
+      window.localStorage.setItem("fileName",response?.data?.filename)
     } catch (error) {
       console.error("An error occurred:", error);
     }
   };
-
   const handleDragEnter = (event) => {
     event.preventDefault();
     setIsDragging(true);
   };
-
   const handleDragLeave = () => {
     // setIsDragging(false);
   };
   const maxFileSize = 125 * 1024 * 1024; // 125 MB in bytes
-
   const handleDrop = (event) => {
     event.preventDefault();
     setIsDragging(false);
@@ -120,8 +118,8 @@ const FileUpload = () => {
           </div>
           }
           <div className="text-center">
-            {selectedFile ? (
-              <Link to="/material-and-questions/title/upload_ID">
+            {uploadedFile ? (
+              <Link to="/material-and-questions">
                 <button className="btn btn-cont common_button">Continue</button>
               </Link>
             ) : (

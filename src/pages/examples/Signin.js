@@ -13,10 +13,7 @@ import Logo from "../../assets/img/logo.svg";
 import { connect } from 'react-redux';
 import { login } from '../../store/actions/authActions';
 import { useHistory } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { BASE_URL } from "../../utils/constant";
-import axios from "axios";
-
+import { useSelector, useDispatch } from 'react-redux'; 
 const Signin = () => {
 
   const [email, setEmail] = useState('');
