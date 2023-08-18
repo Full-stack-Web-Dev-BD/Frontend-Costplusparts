@@ -65,6 +65,8 @@ import jwtDecode from "jwt-decode";
 import { NotAuthenticated } from "./examples/NotAuthenticated";
 import axios from "axios";
 import { BASE_URL } from "../utils/constant";
+import JobDetails from "./dashboard/JobsZone/JobDetails";
+import MyAllParts from "./Jobs/MyAllParts";
 
 const RouteWithLoader = ({ component: Component, ...rest }) => {
   const [loaded, setLoaded] = useState(false);
@@ -196,16 +198,16 @@ export default () => (
     {/* Jobs Flow -> New Job -> Enter job title -> Upload your CAD file -> Material and Questions (CAD render & analysis) */}
     <RouteWithSidebar exact path={"/jobs"} component={Jobs} />
     <RouteWithSidebar exact path={"/scedule-job"} component={SceduleJobs} />
-    <RouteWithSidebar exact path={"/upload-file"} component={FileUpload} />
+    <RouteWithSidebar exact path="/job-details/:jobId" component={JobDetails} />
+    <RouteWithSidebar exact path={"/choose-service/:jobId"} component={ChooseService} />
+    <RouteWithSidebar exact path={"/upload-file/:jobId"} component={FileUpload} /> 
     <RouteWithSidebar
       exact
       path={"/material-and-questions"}
       component={MaterialandQuestions}
     />
-
     <RouteWithSidebar exact path={"/myprofile"} component={ProfileTabs} />
-    <RouteWithSidebar exact path={"/parts"} component={UploadPart} />
-    <RouteWithSidebar exact path={"/chooseservice"} component={ChooseService} />
+    <RouteWithSidebar exact path={"/parts"} component={MyAllParts} />
 
     {/* old */}
     <RouteWithSidebar

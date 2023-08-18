@@ -1,10 +1,38 @@
 import React, { useState } from "react";
 import "./sceduleJob.css";
-import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
+import { BASE_URL, getUserID } from "../../utils/constant";
+import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 const SceduleJobs = () => {
   const [title, settitle] = useState("");
+  const history = useHistory()
+  const createJob = async () => {
+    try {
+      if (!title) {
+        toast.error("Title Required");
+        return;
+      }
+      const response = await axios.post(`${BASE_URL}/api/job`, {
+        jobTitle: title,
+        userID: getUserID(),
+      }); 
+      if (response.status === 200) {
+        toast.success("Job created successfully");
+        history.push("/jobs")
+      } else {
+        toast.error("Failed to create job");
+      }
+    } catch (error) {
+      console.log(error)
+      if (error.response) {
+        toast.error(error.response.data.errors[0].msg);
+      } else {
+        toast.error("An error occurred while creating the job");
+      }
+    }
+  };
   return (
     <div className="container">
       <div className="scedule_jobs">
@@ -20,16 +48,16 @@ const SceduleJobs = () => {
           />
         </span>
         {title ? (
-          <Link to={`/upload-file`}>
-            <button className="btn">Continue</button>
-          </Link>
+          <button onClick={(e) => createJob()} className="btn">
+            Create Job
+          </button>
         ) : (
           <button
             className="btn "
             onClick={(e) => toast.error("Title Required")}
             title="Title Requried"
           >
-            Continue
+            Create Job
           </button>
         )}
       </div>

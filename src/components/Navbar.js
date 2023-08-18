@@ -106,7 +106,7 @@ const CustomNavbar = ({ auth }) => {
                 >
                   <div className="media-body ms-2 text-dark align-items-center d-none d-lg-block">
                     <span>
-                      {auth.user.firstname + " " + auth.user.lastname}
+                      {auth.user?.firstname + " " + auth.user?.lastname}
                     </span>
                     <br />
                     <span className="mb-0 font-small fw-bold">Individual</span>

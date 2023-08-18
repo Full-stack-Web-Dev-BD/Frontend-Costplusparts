@@ -3,13 +3,14 @@ import React, { useEffect, useState } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { BASE_URL, getUserID } from "../../utils/constant";
-import moment from "moment"; 
+import moment from "moment";
 const Jobs = () => {
   const [myJobs, setMyJobs] = useState([]);
   useEffect(() => {
     const fetchJob = async () => {
       const userID = getUserID();
-      const response = await axios.get(`${BASE_URL}/api/job/${userID}`);
+      const response = await axios.get(`${BASE_URL}/api/job/user/${userID}`);
+      console.log("response: ", response.data);
       setMyJobs(response.data);
     };
     fetchJob();
@@ -27,18 +28,20 @@ const Jobs = () => {
               </div>
             </div>
           </Link>
-        </div> 
+        </div>
         {myJobs.reverse().map((el) => (
           <div className="col-md-4 mb-4">
-            <div className="sc_job">
-              <div className="sc_jobs_content  sc_my_job tex-center">
-                <span style={{ textTransform: "capitalize" }}>
-                  {el.jobTitle}
-                </span>
-                <img src={require("./job.png")} />
-                <span> {moment(el.createdAt).fromNow()} </span>
+            <Link to={`/job-details/${el._id}`}>
+              <div className="sc_job">
+                <div className="sc_jobs_content  sc_my_job tex-center">
+                  <span style={{ textTransform: "capitalize" }}>
+                    {el.jobTitle}
+                  </span>
+                  <img src={require("./job.png")} />
+                  <span> {moment(el.createdAt).fromNow()} </span>
+                </div>
               </div>
-            </div>
+            </Link>
           </div>
         ))}
       </div>

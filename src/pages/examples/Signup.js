@@ -121,7 +121,7 @@ const Signup = () => {
                   <InputGroup.Text>
                     <FontAwesomeIcon icon={faEnvelope} />
                   </InputGroup.Text>
-                  <Form.Control autoFocus required type="email" placeholder="contact@gmail.com" onChange={(e) => setEmail(e.target.value)} />
+                  <Form.Control autoFocus required name="email" type="email" placeholder="contact@gmail.com" onChange={(e) => setEmail(e.target.value)} />
                 </InputGroup>
               </Form.Group>
               <Form.Group id="phone" className="mb-4">
@@ -130,7 +130,7 @@ const Signup = () => {
                   <InputGroup.Text>
                     <FontAwesomeIcon icon={faPhone} />
                   </InputGroup.Text>
-                  <Form.Control required type="phone" placeholder="" onChange={(e) => setPhone(e.target.value)} />
+                  <Form.Control required type="number" placeholder="Enter Phone Number" onChange={(e) => setPhone(e.target.value)} />
                 </InputGroup>
               </Form.Group>
               <Form.Group>
