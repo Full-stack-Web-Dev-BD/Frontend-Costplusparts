@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import { BASE_URL, getHeader, getUserID } from "../../utils/constant";
+import { BASE_URL,authTokenInHeader, getUserID } from "../../utils/constant";
 import moment from "moment";
 import JobPreloader from "../../components/JobPreloader/JobPreloader";
 const Jobs = () => {
@@ -12,7 +12,7 @@ const Jobs = () => {
     const fetchJob = async () => {
       const userID = getUserID();
       const response = await axios.get(`${BASE_URL}/api/job/user/${userID}`, {
-        headers: getHeader(),
+        headers: authTokenInHeader(),
       });
       setMyJobs(response.data);
       setLoading(false);
@@ -43,7 +43,7 @@ const Jobs = () => {
           </>
         ) : (
           <>
-            {myJobs.reverse().map((el) => (
+            {myJobs.map((el) => (
               <div className="col-md-4 mb-4">
                 <Link to={`/job-details/${el._id}`}>
                   <div className="sc_job">

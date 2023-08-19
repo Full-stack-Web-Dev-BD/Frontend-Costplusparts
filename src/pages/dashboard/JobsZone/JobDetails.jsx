@@ -2,12 +2,13 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 import { Link, useParams } from "react-router-dom";
-import { BASE_URL, getHeader } from "../../../utils/constant";
+import { BASE_URL, authTokenInHeader } from "../../../utils/constant";
 import moment from "moment-timezone";
+import JobPreloader from "../../../components/JobPreloader/JobPreloader";
 
 const JobDetails = () => {
   const [allParts, setallParts] = useState([]);
-
+  const [loading, setloading] = useState(true);
   const { jobId } = useParams();
 
   useEffect(() => {
@@ -18,9 +19,11 @@ const JobDetails = () => {
 
   const fetchJobDetails = async (id) => {
     try {
-      const response = await axios.get(`${BASE_URL}/api/parts/job/${id}`,{headers:getHeader()});
-      console.log(response.data);
+      const response = await axios.get(`${BASE_URL}/api/parts/job/${id}`, {
+        headers: authTokenInHeader(),
+      });
       setallParts(response.data);
+      setloading(false);
     } catch (error) {
       console.log(error);
     }
@@ -40,21 +43,36 @@ const JobDetails = () => {
             </Link>
           </div>
         </div>
-
-        {allParts.reverse().map((parts, id) => (
-          <div id={id} className="col-md-4 mb-4">
-            <div className="sc_job">
-              <div className="sc_jobs_content  sc_my_job tex-center">
-                <span> {parts.serviceName} </span>
-                <img src={require("./job.png")} />
-                <span> {moment(parts.createdAt).fromNow()} </span>
-                {/* <button className="btn status_btn in_progress">
+        {loading ? (
+          <>
+            {[1, 2].map((el, id) => (
+              <div id={id} className="col-md-4 mb-4">
+                <JobPreloader />
+              </div>
+            ))}
+          </>
+        ) : (
+          <>
+            {allParts.reverse().map((parts, id) => (
+              <Link
+                to={`/material-and-questions/${parts._id}`}
+                id={id}
+                className="col-md-4 mb-4"
+              >
+                <div className="sc_job">
+                  <div className="sc_jobs_content  sc_my_job tex-center">
+                    <span> {parts.serviceName} </span>
+                    <img src={require("./job.png")} />
+                    <span> {moment(parts.createdAt).fromNow()} </span>
+                    {/* <button className="btn status_btn in_progress">
                   In Progress
                 </button> */}
-              </div>
-            </div>
-          </div>
-        ))}
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </>
+        )}
         {/* my uploaded parts */}
         {/* <div className="col-md-4 mb-4">
           <div className="sc_job">
@@ -104,6 +122,7 @@ const JobDetails = () => {
           </div>
         </div> */}
       </div>
+      { (!loading && allParts.length<1) && <h4 className="text-center my-4"> No Parts Created yet </h4>}
     </div>
   );
 };

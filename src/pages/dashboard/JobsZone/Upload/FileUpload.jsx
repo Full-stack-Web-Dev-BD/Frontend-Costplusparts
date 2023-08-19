@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { Link, useParams ,useHistory} from "react-router-dom";
-import { BASE_URL, getHeader } from "../../../../utils/constant";
+import { BASE_URL, authTokenInHeader }from "../../../../utils/constant";
 import axios from "axios";
 
 const FileUpload = () => {
@@ -17,7 +17,7 @@ const history= useHistory()
       const response = await axios.post(
         `${BASE_URL}/api/parts/upload-material`,
         formData,
-        {headers:getHeader()}
+        {headers:authTokenInHeader()}
       );
       toast("File uploaded");
       console.log(response?.data?.filename);
@@ -71,7 +71,7 @@ const history= useHistory()
       jobID: partsJobID,
     };
     try {
-      const response = await axios.post(`${BASE_URL}/api/parts`, data,{headers:getHeader()});
+      const response = await axios.post(`${BASE_URL}/api/parts`, data,{headers:authTokenInHeader()});
       console.log(response.data);
       toast.success("Parts created successfully");
       history.push("/jobs")

@@ -9,8 +9,9 @@ import { Link } from "react-router-dom";
 import { Card } from "@mui/material";
 import { connect } from "react-redux";
 import axios from "axios";
-import { BASE_URL, getHeader } from "../../../utils/constant";
+import { BASE_URL, authTokenInHeader } from "../../../utils/constant";
 import toast from "react-hot-toast";
+import { FaRegHandPointRight } from "react-icons/fa";
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -75,7 +76,7 @@ const ProfileTab = ({ auth }) => {
       const response = await axios.put(
         `${BASE_URL}/api/users/${auth.user._id}`,
         data,
-        {headers:getHeader()}
+        { headers: authTokenInHeader() }
       );
       console.log(response);
       toast.success("User profile updated successfully !!!");
@@ -103,7 +104,7 @@ const ProfileTab = ({ auth }) => {
         const response = await axios.put(
           `${BASE_URL}/api/auth/update-password/${auth.user._id}`,
           data,
-          {headers:getHeader()}
+          { headers: authTokenInHeader() }
         );
         toast.success("Password updated successfully");
       } catch (error) {
@@ -112,6 +113,21 @@ const ProfileTab = ({ auth }) => {
           toast.error(error.msg);
         });
       }
+    }
+  };
+  const upgradePlan = async (plan) => {
+    try {
+      const response = await axios.put(
+        `${BASE_URL}/api/users/plan`,
+        { newPlan: plan },
+        { headers: authTokenInHeader() }
+      );
+      toast.success(`Subscription successfully to ${plan} Plan `);
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -219,6 +235,72 @@ const ProfileTab = ({ auth }) => {
                   >
                     Update Profile
                   </button>
+                </div>
+              </Card>
+            </div>
+            <div className="col-md-6">
+              <Card className="p-4">
+                <div className=" mb-4">
+                  <div>
+                    <h4 className="m-0">
+                      Your Current Plan is
+                      <span
+                        style={{
+                          textTransform: "capitalize",
+                          padding: "10px 30px",
+                          margin: " 0 10px",
+                        }}
+                        className="badge badge-info"
+                      >
+                        {auth.user?.subscription?.plan}
+                      </span>
+                    </h4>
+                    {auth.user?.subscription?.features?.map((feature) => (
+                      <p>
+                        <small> {feature} </small>
+                      </p>
+                    ))}
+                  </div>
+                  <hr />
+                  <div className="pt-4 pb-4">
+                    <h5 onClick={(e) => console.log(auth)}> Basic Plan</h5>
+                    <p>
+                      <FaRegHandPointRight />
+                      <small style={{ margin: "0 5px" }}> 30 hours/month</small>
+                    </p>
+                    <div className="text-right update_profile">
+                      {auth.user?.subscription?.plan == "basic" ? (
+                        <button> Activated </button>
+                      ) : auth.user?.subscription?.plan == "premium" ? (
+                        <button onClick={(e) => upgradePlan("basic")}>
+                          Cancel Premium and Subscribe Basic
+                        </button>
+                      ) : (
+                        <button onClick={(e) => upgradePlan("basic")}>
+                          Upgrade to Basic
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                  <hr />
+                  <div className="pt-4 pb-4">
+                    <h5>Pro Plan </h5>
+                    <p>
+                      <FaRegHandPointRight />
+                      <small style={{ margin: "0 10px" }}>
+                        300 hours/month
+                      </small>
+                    </p>
+                    <div className="text-right update_profile">
+                      {auth.user?.subscription?.plan == "premium" ? (
+                        <button> Activated </button>
+                      ) : (
+                        <button onClick={(e) => upgradePlan("premium")}>
+                          Upgrade to Premium
+                        </button>
+                      )}
+                    </div>
+                  </div>
                 </div>
               </Card>
             </div>

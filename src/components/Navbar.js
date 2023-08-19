@@ -3,13 +3,13 @@ import { IoIosArrowDown } from "react-icons/io";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import {
-  faBell,
   faCog,
   faEnvelopeOpen,
   faSearch,
   faSignOutAlt,
   faUserShield,
 } from "@fortawesome/free-solid-svg-icons";
+import { GrUpgrade } from "react-icons/gr";
 import { faUserCircle } from "@fortawesome/free-regular-svg-icons";
 import {
   Row,
@@ -119,6 +119,15 @@ const CustomNavbar = ({ auth }) => {
                 </div>
               </Dropdown.Toggle>
               <Dropdown.Menu className="user-dropdown dropdown-menu-right mt-2">
+                <Dropdown.Item className="fw-bold">
+                  <p className="m-0">
+                    Current Plan: <b>Free</b>
+                  </p>
+                  <p className="m-0">
+                    <GrUpgrade /> Upgrade Now
+                  </p>
+                </Dropdown.Item>
+                <Dropdown.Divider />
                 <Dropdown.Item className="fw-bold">
                   <Link to={"/myprofile"}>
                     <FontAwesomeIcon icon={faUserCircle} className="me-2" /> My

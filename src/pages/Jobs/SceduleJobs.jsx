@@ -1,31 +1,35 @@
 import React, { useState } from "react";
 import "./sceduleJob.css";
 import toast from "react-hot-toast";
-import { BASE_URL, getHeader, getUserID } from "../../utils/constant";
+import { BASE_URL, authTokenInHeader, getUserID } from "../../utils/constant";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 
 const SceduleJobs = () => {
   const [title, settitle] = useState("");
-  const history = useHistory()
+  const history = useHistory();
   const createJob = async () => {
     try {
       if (!title) {
         toast.error("Title Required");
         return;
       }
-      const response = await axios.post(`${BASE_URL}/api/job`, {
-        jobTitle: title,
-        userID: getUserID(),
-      },{headers:getHeader()}); 
+      const response = await axios.post(
+        `${BASE_URL}/api/job`,
+        {
+          jobTitle: title,
+          userID: getUserID(),
+        },
+        { headers: authTokenInHeader() }
+      );
       if (response.status === 200) {
         toast.success("Job created successfully");
-        history.push("/jobs")
+        history.push("/jobs");
       } else {
         toast.error("Failed to create job");
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
       if (error.response) {
         toast.error(error.response.data.errors[0].msg);
       } else {

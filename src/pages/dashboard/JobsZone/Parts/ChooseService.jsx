@@ -1,5 +1,5 @@
 import React from "react";
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory, Link, useParams } from "react-router-dom";
 
 const ChooseService = () => {
   const { jobId } = useParams();
@@ -8,11 +8,11 @@ const ChooseService = () => {
     <div className="container mt-5">
       <h3 className="text-center mb-4">Choose a service</h3>
       <div className="row">
-        <div
+        <Link
           onClick={(e) => {
             window.localStorage.setItem("service", "Laser cutting");
-            history.push(`/upload-file/${jobId}`);
           }}
+          to={`/upload-file/${jobId}`}
           className="col-md-3 cp"
         >
           <div className="single_part text-center">
@@ -21,13 +21,13 @@ const ChooseService = () => {
               <h6>Laser cutting</h6>
             </div>
           </div>
-        </div>
+        </Link>
 
-        <div
+        <Link
           onClick={(e) => {
             window.localStorage.setItem("service", "Tube cutting");
-            history.push(`/choose-service/${jobId}`);
           }}
+          to={`/upload-file/${jobId}`}
           className="col-md-3 cp"
         >
           <div className="single_part text-center">
@@ -36,13 +36,13 @@ const ChooseService = () => {
               <h6>Tube cutting</h6>
             </div>
           </div>
-        </div>
+        </Link>
 
-        <div
+        <Link
           onClick={(e) => {
             window.localStorage.setItem("service", "CNC Machine");
-            history.push(`/choose-service/${jobId}`);
           }}
+          to={`/upload-file/${jobId}`}
           className="col-md-3 cp"
         >
           <div className="single_part text-center">
@@ -51,13 +51,13 @@ const ChooseService = () => {
               <h6>CNC Machine</h6>
             </div>
           </div>
-        </div>
+        </Link>
 
-        <div
+        <Link
           onClick={(e) => {
             window.localStorage.setItem("service", "3D printing");
-            history.push(`/choose-service/${jobId}`);
           }}
+          to={`/upload-file/${jobId}`}
           className="col-md-3 cp"
         >
           <div className="single_part text-center">
@@ -66,7 +66,7 @@ const ChooseService = () => {
               <h6>3D printing</h6>
             </div>
           </div>
-        </div>
+        </Link>
       </div>
     </div>
   );

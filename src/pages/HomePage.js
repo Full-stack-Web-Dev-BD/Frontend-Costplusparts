@@ -58,13 +58,12 @@ import MaterialandQuestions from "./Jobs/MaterialandQuestions";
 import FileUpload from "./dashboard/JobsZone/Upload/FileUpload";
 import ChooseService from "./dashboard/JobsZone/Parts/ChooseService";
 import ProfileTabs from "./dashboard/JobsZone/ProfileTabs";
-import UploadPart from "./dashboard/JobsZone/UploadPart";
-import { connect, useDispatch } from "react-redux";
+import {  useDispatch } from "react-redux";
 import { LOGIN_SUCCESS, SET_USER } from "../store/actions/actionTypes";
 import jwtDecode from "jwt-decode";
 import { NotAuthenticated } from "./examples/NotAuthenticated";
 import axios from "axios";
-import { BASE_URL, getHeader } from "../utils/constant";
+import { BASE_URL,  authTokenInHeader } from "../utils/constant";
 import JobDetails from "./dashboard/JobsZone/JobDetails";
 import MyAllParts from "./Jobs/MyAllParts";
 
@@ -101,7 +100,7 @@ const RouteWithSidebar = ({ component: Component, ...rest }) => {
     if (!userID) {
       return {};
     }
-    const response = await axios.get(`${BASE_URL}/api/users/${userID}`,{headers:getHeader()});
+    const response = await axios.get(`${BASE_URL}/api/users/${userID}`,{headers:authTokenInHeader()});
     return response.data;
   };
   useEffect(() => {
@@ -203,7 +202,7 @@ export default () => (
     <RouteWithSidebar exact path={"/upload-file/:jobId"} component={FileUpload} /> 
     <RouteWithSidebar
       exact
-      path={"/material-and-questions"}
+      path={"/material-and-questions/:partsID"}
       component={MaterialandQuestions}
     />
     <RouteWithSidebar exact path={"/myprofile"} component={ProfileTabs} />

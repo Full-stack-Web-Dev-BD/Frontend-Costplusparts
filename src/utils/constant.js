@@ -12,8 +12,8 @@ export const getUserID = () => {
   }
   return userID;
 };
-
-export const getHeader= ()=>{
+ 
+export const authTokenInHeader= ()=>{
   return {
     'x-auth-token': window.localStorage.getItem("token")
   }
