@@ -2,14 +2,14 @@ import React, { useEffect, useState } from "react";
 import { Card } from "@mui/material";
 import toast from "react-hot-toast";
 import axios from "axios";
-import { BASE_URL } from "../../utils/constant";
+import { BASE_URL, getHeader } from "../../utils/constant";
 const MyAllParts = () => {
   const [myAllParts, setmyAllParts] = useState([]);
   useEffect(() => {
     fetchAllParts();
   }, []);
   const fetchAllParts = async () => {
-    const response = await axios.get(`${BASE_URL}/api/parts`);
+    const response = await axios.get(`${BASE_URL}/api/parts`,{headers:getHeader()});
     setmyAllParts(response.data);
   };
   return (

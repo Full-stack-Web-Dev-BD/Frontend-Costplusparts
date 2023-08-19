@@ -4,7 +4,7 @@ import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import jwtDecode from "jwt-decode";
 import toast from "react-hot-toast";
 import axios from "axios";
-import { BASE_URL } from "../../utils/constant";
+import { BASE_URL, getHeader } from "../../utils/constant";
 const MaterialandQuestions = () => {
   const [materialCount, setmaterialCount] = useState(10);
   const [Resolution, setResolution] = useState("");
@@ -50,7 +50,7 @@ const MaterialandQuestions = () => {
       toast.error("Please Fill the form and try again");
     }
     try {
-      const response = await axios.post(`${BASE_URL}/api/job`, data);
+      const response = await axios.post(`${BASE_URL}/api/job`, data,{headers:getHeader()});
       toast.success("Job  Created Successfully");
       setTimeout(() => {
         window.localStorage.removeItem("jobTitle");

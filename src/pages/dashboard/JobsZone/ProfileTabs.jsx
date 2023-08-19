@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 import { Card } from "@mui/material";
 import { connect } from "react-redux";
 import axios from "axios";
-import { BASE_URL } from "../../../utils/constant";
+import { BASE_URL, getHeader } from "../../../utils/constant";
 import toast from "react-hot-toast";
 
 function CustomTabPanel(props) {
@@ -74,7 +74,8 @@ const ProfileTab = ({ auth }) => {
     try {
       const response = await axios.put(
         `${BASE_URL}/api/users/${auth.user._id}`,
-        data
+        data,
+        {headers:getHeader()}
       );
       console.log(response);
       toast.success("User profile updated successfully !!!");
@@ -101,7 +102,8 @@ const ProfileTab = ({ auth }) => {
       try {
         const response = await axios.put(
           `${BASE_URL}/api/auth/update-password/${auth.user._id}`,
-          data
+          data,
+          {headers:getHeader()}
         );
         toast.success("Password updated successfully");
       } catch (error) {

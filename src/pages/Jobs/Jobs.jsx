@@ -2,16 +2,20 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import { BASE_URL, getUserID } from "../../utils/constant";
+import { BASE_URL, getHeader, getUserID } from "../../utils/constant";
 import moment from "moment";
+import JobPreloader from "../../components/JobPreloader/JobPreloader";
 const Jobs = () => {
   const [myJobs, setMyJobs] = useState([]);
+  const [Loading, setLoading] = useState(true);
   useEffect(() => {
     const fetchJob = async () => {
       const userID = getUserID();
-      const response = await axios.get(`${BASE_URL}/api/job/user/${userID}`);
-      console.log("response: ", response.data);
+      const response = await axios.get(`${BASE_URL}/api/job/user/${userID}`, {
+        headers: getHeader(),
+      });
       setMyJobs(response.data);
+      setLoading(false);
     };
     fetchJob();
   }, []);
@@ -29,21 +33,33 @@ const Jobs = () => {
             </div>
           </Link>
         </div>
-        {myJobs.reverse().map((el) => (
-          <div className="col-md-4 mb-4">
-            <Link to={`/job-details/${el._id}`}>
-              <div className="sc_job">
-                <div className="sc_jobs_content  sc_my_job tex-center">
-                  <span style={{ textTransform: "capitalize" }}>
-                    {el.jobTitle}
-                  </span>
-                  <img src={require("./job.png")} />
-                  <span> {moment(el.createdAt).fromNow()} </span>
-                </div>
+        {Loading ? (
+          <>
+            {[1, 2].map((el) => (
+              <div className="col-md-4 mb-4">
+                <JobPreloader />
               </div>
-            </Link>
-          </div>
-        ))}
+            ))}
+          </>
+        ) : (
+          <>
+            {myJobs.reverse().map((el) => (
+              <div className="col-md-4 mb-4">
+                <Link to={`/job-details/${el._id}`}>
+                  <div className="sc_job">
+                    <div className="sc_jobs_content  sc_my_job tex-center">
+                      <span style={{ textTransform: "capitalize" }}>
+                        {el.jobTitle}
+                      </span>
+                      <img src={require("./job.png")} />
+                      <span> {moment(el.createdAt).fromNow()} </span>
+                    </div>
+                  </div>
+                </Link>
+              </div>
+            ))}
+          </>
+        )}
       </div>
     </div>
   );

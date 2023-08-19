@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 import { Link, useParams } from "react-router-dom";
-import { BASE_URL } from "../../../utils/constant";
+import { BASE_URL, getHeader } from "../../../utils/constant";
 import moment from "moment-timezone";
 
 const JobDetails = () => {
@@ -18,7 +18,7 @@ const JobDetails = () => {
 
   const fetchJobDetails = async (id) => {
     try {
-      const response = await axios.get(`${BASE_URL}/api/parts/job/${id}`);
+      const response = await axios.get(`${BASE_URL}/api/parts/job/${id}`,{headers:getHeader()});
       console.log(response.data);
       setallParts(response.data);
     } catch (error) {

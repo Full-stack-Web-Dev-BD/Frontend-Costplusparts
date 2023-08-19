@@ -64,7 +64,7 @@ import { LOGIN_SUCCESS, SET_USER } from "../store/actions/actionTypes";
 import jwtDecode from "jwt-decode";
 import { NotAuthenticated } from "./examples/NotAuthenticated";
 import axios from "axios";
-import { BASE_URL } from "../utils/constant";
+import { BASE_URL, getHeader } from "../utils/constant";
 import JobDetails from "./dashboard/JobsZone/JobDetails";
 import MyAllParts from "./Jobs/MyAllParts";
 
@@ -101,7 +101,7 @@ const RouteWithSidebar = ({ component: Component, ...rest }) => {
     if (!userID) {
       return {};
     }
-    const response = await axios.get(`${BASE_URL}/api/users/${userID}`);
+    const response = await axios.get(`${BASE_URL}/api/users/${userID}`,{headers:getHeader()});
     return response.data;
   };
   useEffect(() => {

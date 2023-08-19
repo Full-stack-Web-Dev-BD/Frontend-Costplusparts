@@ -12,3 +12,9 @@ export const getUserID = () => {
   }
   return userID;
 };
+
+export const getHeader= ()=>{
+  return {
+    'x-auth-token': window.localStorage.getItem("token")
+  }
+}

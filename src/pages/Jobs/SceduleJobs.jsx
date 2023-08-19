@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./sceduleJob.css";
 import toast from "react-hot-toast";
-import { BASE_URL, getUserID } from "../../utils/constant";
+import { BASE_URL, getHeader, getUserID } from "../../utils/constant";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 
@@ -17,7 +17,7 @@ const SceduleJobs = () => {
       const response = await axios.post(`${BASE_URL}/api/job`, {
         jobTitle: title,
         userID: getUserID(),
-      }); 
+      },{headers:getHeader()}); 
       if (response.status === 200) {
         toast.success("Job created successfully");
         history.push("/jobs")
