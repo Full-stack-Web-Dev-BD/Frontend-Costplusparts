@@ -62,7 +62,9 @@ const JobDetails = () => {
                 <div className="sc_job">
                   <div className="sc_jobs_content  sc_my_job tex-center">
                     <span> {parts.serviceName} </span>
-                    <img src={require("./job.png")} />
+                    <span className="parts_image">
+                    <img src={`${BASE_URL}/uploads/${parts.materialFile}.png`} />
+                    </span>
                     <span> {moment(parts.createdAt).fromNow()} </span>
                     {/* <button className="btn status_btn in_progress">
                   In Progress

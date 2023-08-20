@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Card } from "@mui/material";
 import { AiOutlineMinus, AiFillDelete, AiOutlinePlus } from "react-icons/ai";
-import jwtDecode from "jwt-decode";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { BASE_URL, authTokenInHeader } from "../../utils/constant";
@@ -56,10 +55,10 @@ const MaterialandQuestions = () => {
         data,
         { headers: authTokenInHeader() }
       );
-      toast.success("Request Submitted successfully !!!")
-      fetchPartsDetails()
+      toast.success("Request Submitted successfully !!!");
+      fetchPartsDetails();
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
   return (
@@ -71,15 +70,13 @@ const MaterialandQuestions = () => {
       ) : (
         <Card className="p-4">
           <div className="d-flex" style={{ gap: "20px" }}>
-            <div className="material_box">
-              <img src={require("./material.png")} />
+            <div className="material_box parts_image">
+              <img
+                src={`${BASE_URL}/uploads/${partsDetails.materialFile}.png`}
+              />
             </div>
             <div style={{ width: "100%" }}>
-              <h2> {partsDetails.serviceName} </h2>
-              <p className="m-0" style={{ textTransform: "capitalize" }}>
-                {" "}
-                {"Parts Name"}{" "}
-              </p>
+              <h2> {partsDetails.serviceName} </h2> 
               <div
                 className="d-flex"
                 style={{
@@ -92,19 +89,18 @@ const MaterialandQuestions = () => {
                   style={{ display: "flex", gap: "20px", alignItems: "center" }}
                 >
                   <span>
-                    Quantity : <b>{materialCount}</b>{" "}
+                    Quantity : <b>{materialCount}</b>
                   </span>
                   <button className="btn border-btn">
-                    {" "}
                     <AiFillDelete /> Remove Parts
                   </button>
                 </div>
               </div>
               <hr className="m-0" />
               <p>
-                <span className="mr-3"> X: 4.500in</span>
-                <span className="mr-3"> Y: 4.484in</span>
-                <span className="mr-3"> Z: 3.274in</span>
+                <span className="mr-3"> X: {partsDetails.dimention[0]}mm </span>
+                <span className="mr-3"> Y: {partsDetails.dimention[1]}mm</span>
+                <span className="mr-3"> Z: {partsDetails.dimention[2]}mm</span>
               </p>
             </div>
           </div>

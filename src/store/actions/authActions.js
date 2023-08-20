@@ -53,11 +53,12 @@ export const signup =
       }, 1400);
     } catch (error) {
       // dispatch({ type: 'LOGIN_FAILURE', payload: error.message });
+      console.log("error", error);
       var errorsResponse;
       errorsResponse = error.response.data.errors;
       if (errorsResponse.length > 0) {
         errorsResponse.map((el) => {
-          toast.error(el.msg, { position: "top-right" });
+          toast.error(el.msg);
         });
       }
     }

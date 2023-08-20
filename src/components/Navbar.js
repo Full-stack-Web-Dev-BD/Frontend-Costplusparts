@@ -109,7 +109,11 @@ const CustomNavbar = ({ auth }) => {
                       {auth.user?.firstname + " " + auth.user?.lastname}
                     </span>
                     <br />
-                    <span className="mb-0 font-small fw-bold">Individual</span>
+                    <span className="mb-0 font-small fw-bold badge badge-info">
+                      <b style={{ textTransform: "capitalize" }}>
+                        {auth.user?.subscription?.plan}
+                      </b>
+                    </span>
                     <br />
                   </div>
                   <Image
@@ -121,10 +125,10 @@ const CustomNavbar = ({ auth }) => {
               <Dropdown.Menu className="user-dropdown dropdown-menu-right mt-2">
                 <Dropdown.Item className="fw-bold">
                   <p className="m-0">
-                    Current Plan: <b>Free</b>
-                  </p>
-                  <p className="m-0">
-                    <GrUpgrade /> Upgrade Now
+                    Current Plan:
+                    <b style={{ textTransform: "capitalize" }}>
+                      {auth.user?.subscription?.plan}
+                    </b>
                   </p>
                 </Dropdown.Item>
                 <Dropdown.Divider />

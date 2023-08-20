@@ -47,12 +47,12 @@ function a11yProps(index) {
 }
 
 const ProfileTab = ({ auth }) => {
-  const [firstname, setfirstname] = useState(auth.user.firstname);
-  const [lastname, setlastname] = useState(auth.user.lastname);
-  const [company, setcompany] = useState(auth.user.company);
-  const [country, setcountry] = useState(auth.user.country);
-  const [phone, setphone] = useState(auth.user.phone);
-  const [postalCode, setpostalCode] = useState(auth.user.postalCode);
+  const [firstname, setfirstname] = useState(auth.user?.firstname);
+  const [lastname, setlastname] = useState(auth.user?.lastname);
+  const [company, setcompany] = useState(auth.user?.company);
+  const [country, setcountry] = useState(auth.user?.country);
+  const [phone, setphone] = useState(auth.user?.phone);
+  const [postalCode, setpostalCode] = useState(auth.user?.postalCode);
   // password update
   const [password, setpassword] = useState("");
   const [newPassword, setnewPassword] = useState("");
