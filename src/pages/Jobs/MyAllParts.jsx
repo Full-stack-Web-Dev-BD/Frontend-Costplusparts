@@ -42,7 +42,7 @@ const MyAllParts = () => {
               <Card key={i}>
                 <div className="d-flex" style={{ gap: "20px", padding:'20px' }}>
                   <div className="material_box">
-                    <img src={require("./material.png")} />
+                    <img src={`${BASE_URL}/uploads/${parts.materialFile}.png`} />
                   </div>
                   <div style={{ width: "100%" }}>
                     <h2> {parts.serviceName ? parts.serviceName:'Parts  Service'} </h2>

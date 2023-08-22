@@ -50,7 +50,7 @@ import Tooltips from "./components/Tooltips";
 import Toasts from "./components/Toasts";
 import Jobs from "./Jobs/Jobs";
 import SceduleJobs from "./Jobs/SceduleJobs";
-import { DashboardPage } from "./dashboard/DashboardPage";
+import DashboardPage  from "./dashboard/DashboardPage";
 import MaterialandQuestions from "./Jobs/MaterialandQuestions";
 // import Materials from './dashboard/JobsZone/Materials';
 // import UploadPart from './dashboard/JobsZone/UploadPart';
