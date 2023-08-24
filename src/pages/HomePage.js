@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { Routes } from "../routes";
 
-// pages
-import Presentation from "./Presentation";
+// pages 
 import Home from "./Home";
 import Upgrade from "./Upgrade";
 import Transactions from "./Transactions";
@@ -66,6 +65,8 @@ import axios from "axios";
 import { BASE_URL,  authTokenInHeader } from "../utils/constant";
 import JobDetails from "./dashboard/JobsZone/JobDetails";
 import MyAllParts from "./Jobs/MyAllParts";
+import ContactPage from "./dashboard/Contact/ContactPage";
+import "./app.css"
 
 const RouteWithLoader = ({ component: Component, ...rest }) => {
   const [loaded, setLoaded] = useState(false);
@@ -207,6 +208,7 @@ export default () => (
     />
     <RouteWithSidebar exact path={"/myprofile"} component={ProfileTabs} />
     <RouteWithSidebar exact path={"/parts"} component={MyAllParts} />
+    <RouteWithSidebar exact path={"/contact"} component={ContactPage} />
 
     {/* old */}
     <RouteWithSidebar

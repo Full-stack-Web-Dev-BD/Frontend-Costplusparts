@@ -2,7 +2,7 @@ import React from "react";
 import ReactApexChart from "react-apexcharts";
 
 const PieChart = ({ spended }) => {
-  const series = [spended > 1 ? spended : 0.1, 100];
+  const series = [100, 100];
 
   const options = {
     legend: {
@@ -44,8 +44,11 @@ const PieChart = ({ spended }) => {
 
   return (
     <div id="chart">
+      {
+        console.log("spending " , spended)
+      }
       {spended ? (
-        <ReactApexChart options={options} series={series} type="donut" />
+        <ReactApexChart options={options} series={[spended,100- spended]} type="donut" />
       ) : (
         ""
       )}

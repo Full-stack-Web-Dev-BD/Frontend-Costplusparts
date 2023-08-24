@@ -3,15 +3,18 @@ import React, { useEffect, useState } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 import { Link, useParams } from "react-router-dom";
 import { BASE_URL, authTokenInHeader } from "../../../utils/constant";
-import {AiOutlineClockCircle} from 'react-icons/ai'
+import { AiOutlineClockCircle } from "react-icons/ai";
 import moment from "moment-timezone";
 import JobPreloader from "../../../components/JobPreloader/JobPreloader";
 import { Card } from "@mui/material";
-import "./jobDetails.css"
+import "./jobDetails.css";
+import toast from "react-hot-toast";
+import PartsPreloader from "../../../components/SinglePartsPreloader/PartsPreloader";
 
 const JobDetails = () => {
   const [allParts, setallParts] = useState([]);
   const [loading, setloading] = useState(true);
+  const [jobDetails, setJobDetails] = useState({});
   const { jobId } = useParams();
 
   useEffect(() => {
@@ -26,39 +29,96 @@ const JobDetails = () => {
         headers: authTokenInHeader(),
       });
       setallParts(response.data);
+
+      const response1 = await axios.get(`${BASE_URL}/api/job/${id}`, {
+        headers: authTokenInHeader(),
+      });
+      console.log(response1.data);
+      setJobDetails(response1.data);
       setloading(false);
     } catch (error) {
       console.log(error);
     }
   };
 
+  const handleJobTime = async (status) => {
+    try {
+      const response = await axios.get(
+        `${BASE_URL}/api/job/toggle-status/${jobId}`,
+        { headers: authTokenInHeader() }
+      );
+      console.log(response.data);
+      toast.success("Job Status Updated");
+      setJobDetails(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className="p-5">
       <div className="row mt-5">
-        <div className="col-md-12 mb-4">
-          <Card>
-            <div
-              className="row"
-              style={{ display: "flex", alignItems: "center" }}
-            >
-              <div className=" col-md-4 p-3 _clock">
-                <AiOutlineClockCircle />
-              </div>
-              <div className=" col-md-8 p-3">
-                <h4> This is Job On Progress </h4>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic
-                  possimus corrupti repudiandae odit corporis modi voluptate
-                  necessitatibus rerum vero nemo eos quod consequatur ex, nulla
-                  itaque sequi, aperiam debitis nesciunt?
-                </p>
-                <div className="job_action">
-                  <button className="btn btn_common"> Stop </button>
+        {loading ? (
+          <div className="mb-4">
+            <PartsPreloader />
+          </div>
+        ) : (
+          <div className="col-md-12 mb-4">
+            <Card>
+              <div
+                className="row"
+                style={{ display: "flex", alignItems: "center" }}
+              >
+                <div className=" col-md-4 p-3 ">
+                  <div className="_clock ml-2">
+                    <AiOutlineClockCircle />
+                  </div>
+                </div>
+                <div className=" col-md-8 p-3 ">
+                  <div className="mr-2">
+                    {jobDetails.timeSpended >=
+                    jobDetails.estimatedTimeToSpend ? (
+                      <h4> This is Job Marked as Completed </h4>
+                    ) : (
+                      <div>
+                        {jobDetails.status ? (
+                          <h4> This is Job On Progress </h4>
+                        ) : (
+                          <h4> Start this job by clicking button below ! </h4>
+                        )}
+                        <h4>
+                          Time Used : {jobDetails.timeSpended.toFixed(3)}h /
+                          {jobDetails.estimatedTimeToSpend}h
+                        </h4>
+                      </div>
+                    )}
+                    <p>
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                      Hic possimus corrupti repudiandae odit corporis modi
+                      voluptate necessitatibus rerum vero nemo eos quod
+                      consequatur ex, nulla itaque sequi, aperiam debitis
+                      nesciunt?
+                    </p>
+                    <div className="job_action">
+                      {jobDetails.timeSpended >=
+                      jobDetails.estimatedTimeToSpend ? (
+                        <button className="btn btn_common" disabled>
+                          Completed
+                        </button>
+                      ) : (
+                        <button
+                          onClick={handleJobTime}
+                          className="btn btn_common"
+                        >
+                          {jobDetails.status ? "Stop" : "Start"}
+                        </button>
+                      )}
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </Card>
-        </div>
+            </Card>
+          </div>
+        )}
         <div className="col-md-4 mb-4 cp">
           <div className="sc_job">
             <Link to={`/choose-service/${jobId}`}>
@@ -80,7 +140,7 @@ const JobDetails = () => {
           </>
         ) : (
           <>
-            {allParts.reverse().map((parts, id) => (
+            {allParts.map((parts, id) => (
               <Link
                 to={`/material-and-questions/${parts._id}`}
                 id={id}

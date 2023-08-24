@@ -9,29 +9,40 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import PartsPreloader from "../../components/SinglePartsPreloader/PartsPreloader";
 import { connect } from "react-redux";
+import PreviousJobHours from "./PreviousJobHours";
 
 const DashboardPage = ({ auth }) => {
   const [myJobs, setMyJobs] = useState([]);
   const [Loading, setLoading] = useState(true);
+  const [previousJobHours, setPreviousJobHours] = useState([]);
   useEffect(() => {
     const fetchJob = async () => {
       const userID = getUserID();
-      const response = await axios.get(`${BASE_URL}/api/job/user/${userID}`, {
-        headers: authTokenInHeader(),
-      });
-      setMyJobs(response.data);
-      setLoading(false);
+      try {
+        const response = await axios.get(`${BASE_URL}/api/job/user/${userID}`, {
+          headers: authTokenInHeader(),
+        });
+        const response1 = await axios.get(`${BASE_URL}/api/job/latest`, {
+          headers: authTokenInHeader(),
+        });
+        setPreviousJobHours(response1.data)
+        setMyJobs(response.data);
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+      }
     };
     fetchJob();
   }, []);
   const calculatePercentage = (usedTime, totalTime) => {
+    if (usedTime> totalTime) return 100
     var result =
       (usedTime ? parseInt(usedTime) / totalTime : 0 / totalTime) * 100;
     return result.toFixed(1);
   };
   return (
     <div className="mt-4  p-3">
-      <div className="row h-100">
+      <div className="row h-100 p-3">
         {Loading ? (
           <div className="col-12">
             <PartsPreloader />
@@ -43,8 +54,8 @@ const DashboardPage = ({ auth }) => {
                 <div className="row pt-3 pb-3">
                   <div className="col-md-6">
                     <div className="pie_holder">
-                      <PieChart spended={0.1}  />
-                      <span>  </span>
+                      <PieChart spended={0.1} />
+                      <span> </span>
                     </div>
                   </div>
                   <div className="col-md-6 y_center">
@@ -128,37 +139,39 @@ const DashboardPage = ({ auth }) => {
               ) : (
                 <>
                   {myJobs.slice(0, 3).map((job, id) => (
-                    <div className="col-md-4 h-220" key={id}>
-                      <div className="row pt-3 pb-3">
-                        <div className="col-md-6">
-                          <div className="pie_holder">
-                            <PieChart spended={calculatePercentage()} />
-                            <span>
-                              {calculatePercentage(
-                                job.timeSpended,
-                                (auth.user?.subscription?.features?.[0].split(
-                                  " "
-                                ))[0]
-                              )}
-                              %
-                            </span>
+                    <Link
+                      to={`/job-details/${job._id}`}
+                      className="col-md-4 h-220"
+                      key={id}
+                    >
+                      <div>
+                        <div className="row pt-3 pb-3">
+                          <div className="col-md-6">
+                            <div className="pie_holder"> 
+                              <PieChart spended={calculatePercentage(
+                                  job.timeSpended,
+                                  job.estimatedTimeToSpend)} />
+                              <span>
+                                {calculatePercentage(
+                                  job.timeSpended,
+                                  job.estimatedTimeToSpend
+                                )}
+                                %
+                              </span>
+                            </div>
+                          </div>
+                          <div className="col-md-6 y_center">
+                            <h3> {job.jobTitle} </h3>
+                            <h5>
+                              {job.timeSpended> job.estimatedTimeToSpend ? job.estimatedTimeToSpend: job.timeSpended.toFixed(2)}
+                              <span className="hrs">hrs</span> /
+                              {job.estimatedTimeToSpend}
+                              <span className="hrs">hrs</span>
+                            </h5>
                           </div>
                         </div>
-                        <div className="col-md-6 y_center">
-                          <h3> {job.jobTitle} </h3>
-                          <h5>
-                            {job.timeSpended ? job.timeSpended : 0}
-                            <span className="hrs">hrs</span> /
-                            {
-                              (auth.user?.subscription?.features?.[0].split(
-                                " "
-                              ))[0]
-                            }
-                            <span className="hrs">hrs</span>
-                          </h5>
-                        </div>
                       </div>
-                    </div>
+                    </Link>
                   ))}
                 </>
               )}
@@ -166,6 +179,17 @@ const DashboardPage = ({ auth }) => {
             </div>
           </Card>
         </div>
+      </div>
+      <div>
+        {Loading ? (
+          <div className="mt-5 p-3">
+            <PartsPreloader />
+          </div>
+        ) : (
+          <div className="p-3">
+            <PreviousJobHours previousJobHours={previousJobHours} />
+          </div>
+        )}
       </div>
     </div>
   );
