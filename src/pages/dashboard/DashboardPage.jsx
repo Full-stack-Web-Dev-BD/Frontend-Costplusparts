@@ -25,7 +25,7 @@ const DashboardPage = ({ auth }) => {
         const response1 = await axios.get(`${BASE_URL}/api/job/latest`, {
           headers: authTokenInHeader(),
         });
-        setPreviousJobHours(response1.data)
+        setPreviousJobHours(response1.data);
         setMyJobs(response.data);
         setLoading(false);
       } catch (error) {
@@ -35,7 +35,7 @@ const DashboardPage = ({ auth }) => {
     fetchJob();
   }, []);
   const calculatePercentage = (usedTime, totalTime) => {
-    if (usedTime> totalTime) return 100
+    if (usedTime > totalTime) return 100;
     var result =
       (usedTime ? parseInt(usedTime) / totalTime : 0 / totalTime) * 100;
     return result.toFixed(1);
@@ -49,8 +49,8 @@ const DashboardPage = ({ auth }) => {
           </div>
         ) : (
           <>
-            <div className="col-md-4 h-220">
-              <Card className="h-100">
+            <div className="col-md-4 h-220 mb-4">
+              <Card className="h-100 p-3">
                 <div className="row pt-3 pb-3">
                   <div className="col-md-6">
                     <div className="pie_holder">
@@ -69,11 +69,11 @@ const DashboardPage = ({ auth }) => {
               </Card>
             </div>
 
-            <div className="col-md-4 h-220">
-              <Card className="h-100">
+            <div className="col-md-4 h-220 mb-4">
+              <Card className="h-100 p-3">
                 <div className="row pt-3 pb-3">
                   <div className="col-md-6  ">
-                    <div className="p-4 pb-1">
+                    <div className=" pb-1">
                       <h1>$ 18.6K</h1>
                     </div>
                     <div className="pie_holder">
@@ -95,12 +95,10 @@ const DashboardPage = ({ auth }) => {
               </Card>
             </div>
             <div className="col-md-4 h-220">
-              <Card className="h-100">
+              <Card className="h-100 p-3">
                 <div className="row pt-3 pb-3">
                   <div className="col-md-6  ">
-                    <div className="p-4 pb-1">
-                      <h1> {myJobs.length} Jobs</h1>
-                    </div>
+                    <h1> {myJobs.length} Jobs</h1>
                     <div className="pie_holder">
                       <LineChart
                         series={[
@@ -131,7 +129,7 @@ const DashboardPage = ({ auth }) => {
                 <span>See more</span>
               </Link>
             </div>
-            <div className="row">
+            <div className="row  p-3">
               {Loading ? (
                 <div className="col-12">
                   <PartsPreloader />
@@ -147,10 +145,13 @@ const DashboardPage = ({ auth }) => {
                       <div>
                         <div className="row pt-3 pb-3">
                           <div className="col-md-6">
-                            <div className="pie_holder"> 
-                              <PieChart spended={calculatePercentage(
+                            <div className="pie_holder">
+                              <PieChart
+                                spended={calculatePercentage(
                                   job.timeSpended,
-                                  job.estimatedTimeToSpend)} />
+                                  job.estimatedTimeToSpend
+                                )}
+                              />
                               <span>
                                 {calculatePercentage(
                                   job.timeSpended,
@@ -163,7 +164,9 @@ const DashboardPage = ({ auth }) => {
                           <div className="col-md-6 y_center">
                             <h3> {job.jobTitle} </h3>
                             <h5>
-                              {job.timeSpended> job.estimatedTimeToSpend ? job.estimatedTimeToSpend: job.timeSpended.toFixed(2)}
+                              {job.timeSpended > job.estimatedTimeToSpend
+                                ? job.estimatedTimeToSpend
+                                : job.timeSpended.toFixed(2)}
                               <span className="hrs">hrs</span> /
                               {job.estimatedTimeToSpend}
                               <span className="hrs">hrs</span>

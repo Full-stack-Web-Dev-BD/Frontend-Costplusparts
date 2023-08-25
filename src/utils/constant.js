@@ -1,6 +1,8 @@
 import jwtDecode from "jwt-decode";
+import dotenv from 'dotenv';
+dotenv.config();
 
-export const BASE_URL = "http://localhost:5000";
+export  const BASE_URL = process.env.BASE_URL;
 
 export const getUserID = () => {
   var userID;

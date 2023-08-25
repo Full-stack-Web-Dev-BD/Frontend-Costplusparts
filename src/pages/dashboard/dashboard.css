@@ -4,7 +4,7 @@
 }
 
 .h-220 {
-    height: 220px !important;
+    min-height: 220px !important;
 }
 
 .st_title {
