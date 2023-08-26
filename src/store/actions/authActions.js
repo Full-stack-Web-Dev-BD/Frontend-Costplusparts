@@ -1,8 +1,10 @@
 import axios from "axios";
 import toast from "react-hot-toast";
-import { useHistory } from "react-router-dom";
 import { BASE_URL } from "../../utils/constant";
 import jwtDecode from "jwt-decode";
+
+
+
 
 export const login = (email, password) => async (dispatch) => {
   try {
@@ -17,7 +19,7 @@ export const login = (email, password) => async (dispatch) => {
   } catch (error) {
     console.log("login error", error);
     var errorsResponse;
-    errorsResponse = error.response.data.errors;
+    errorsResponse = error?.response?.data?.errors;
     if (errorsResponse.length > 0) {
       errorsResponse.map((el) => {
         toast.error(el.msg, { position: "top-right" });

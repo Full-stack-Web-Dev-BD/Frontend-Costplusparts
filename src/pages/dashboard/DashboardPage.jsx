@@ -38,6 +38,7 @@ const DashboardPage = ({ auth }) => {
     if (usedTime > totalTime) return 100;
     var result =
       (usedTime ? parseInt(usedTime) / totalTime : 0 / totalTime) * 100;
+    console.log(result);
     return result.toFixed(1);
   };
   return (
@@ -54,15 +55,29 @@ const DashboardPage = ({ auth }) => {
                 <div className="row pt-3 pb-3">
                   <div className="col-md-6">
                     <div className="pie_holder">
-                      <PieChart spended={0.1} />
-                      <span> </span>
+                      <PieChart
+                        spended={Math.floor(
+                          calculatePercentage(
+                            auth.user?.subscription?.usage.toFixed(0),
+                            parseInt(auth.user?.subscription?.features[0])
+                          )
+                        )}
+                      />
+                      <span>
+                        {Math.floor(calculatePercentage(
+                          auth.user?.subscription?.usage.toFixed(0),
+                          parseInt(auth.user?.subscription?.features[0])
+                        ))}
+                        %
+                      </span>
                     </div>
                   </div>
                   <div className="col-md-6 y_center">
                     <h3>Available hours this month</h3>
                     <h5>
-                      250 <span className="hrs">hrs</span> / 300
-                      <span className="hrs">hrs</span>
+                      {auth.user?.subscription?.usage.toFixed(0)}
+                      <span className="hrs">hrs</span> /
+                      <span> {auth.user?.subscription?.features[0]} </span>
                     </h5>
                   </div>
                 </div>
@@ -94,9 +109,35 @@ const DashboardPage = ({ auth }) => {
                 </div>
               </Card>
             </div>
-            <div className="col-md-4 h-220">
+
+            <div className="col-md-4 h-220 mb-4">
               <Card className="h-100 p-3">
                 <div className="row pt-3 pb-3">
+                  <div className="col-md-6  ">
+                    <div className=" pb-1">
+                      <h1> {myJobs.length} Jobs</h1>
+                    </div>
+                    <div className="pie_holder">
+                      <LineChart
+                        series={[
+                          [25, 16, 6, 29, 10, 48, 11],
+                          [42, 7, 20, 3, 16, 36, 23, 17],
+                        ]}
+                      />
+                    </div>
+                  </div>
+                  <div className="col-md-6 y_center _up">
+                    <h4>Total Job Created</h4>
+                    <h6>
+                      <AiOutlineArrowUp /> <span>15%</span>
+                    </h6>
+                  </div>
+                </div>
+              </Card>
+            </div>
+            {/* <div className="col-md-4 h-220">
+              <Card className="h-100 p-3">
+                <div className="row pt-3 ">
                   <div className="col-md-6  ">
                     <h1> {myJobs.length} Jobs</h1>
                     <div className="pie_holder">
@@ -116,7 +157,7 @@ const DashboardPage = ({ auth }) => {
                   </div>
                 </div>
               </Card>
-            </div>
+            </div> */}
           </>
         )}
       </div>
@@ -153,10 +194,10 @@ const DashboardPage = ({ auth }) => {
                                 )}
                               />
                               <span>
-                                {calculatePercentage(
+                                {Math.floor(calculatePercentage(
                                   job.timeSpended,
                                   job.estimatedTimeToSpend
-                                )}
+                                ))}
                                 %
                               </span>
                             </div>

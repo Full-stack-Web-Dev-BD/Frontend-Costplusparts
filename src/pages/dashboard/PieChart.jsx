@@ -43,10 +43,7 @@ const PieChart = ({ spended }) => {
   };
 
   return (
-    <div id="chart">
-      {
-        console.log("spending " , spended)
-      }
+    <div id="chart"> 
       {spended ? (
         <ReactApexChart options={options} series={[spended,100- spended]} type="donut" />
       ) : (

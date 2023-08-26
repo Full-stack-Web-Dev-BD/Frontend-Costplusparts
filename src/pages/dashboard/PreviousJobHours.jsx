@@ -37,8 +37,15 @@ export default function PreviousJobHours({ previousJobHours }) {
               <TableCell component="th" scope="row">
                 {row.jobTitle}
               </TableCell>
-              <TableCell align="right">{row.estimatedTimeToSpend} <b>hrs</b> </TableCell>
-              <TableCell align="right">{row.timeSpended > row.estimatedTimeToSpend ? row.estimatedTimeToSpend :row.timeSpended.toFixed(2)} <b>hrs</b> </TableCell>
+              <TableCell align="right">
+                {row.estimatedTimeToSpend} <b>hrs</b>{" "}
+              </TableCell>
+              <TableCell align="right">
+                {row.timeSpended > row.estimatedTimeToSpend
+                  ? row.estimatedTimeToSpend
+                  : row.timeSpended.toFixed(2)}{" "}
+                <b>hrs</b>{" "}
+              </TableCell>
               <TableCell align="right">
                 <Link to={`/job-details/${row._id}`}>
                   <Button variant="outlined" color="primary">
