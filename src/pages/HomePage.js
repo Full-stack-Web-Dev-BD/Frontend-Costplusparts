@@ -67,6 +67,8 @@ import JobDetails from "./dashboard/JobsZone/JobDetails";
 import MyAllParts from "./Jobs/MyAllParts";
 import ContactPage from "./dashboard/Contact/ContactPage";
 import "./app.css"
+import SceduleHistory from "./dashboard/SceduleHistory/SceduleHistory";
+import Scedule from "./Jobs/Scedule";
 
 const RouteWithLoader = ({ component: Component, ...rest }) => {
   const [loaded, setLoaded] = useState(false);
@@ -209,6 +211,8 @@ export default () => (
     <RouteWithSidebar exact path={"/myprofile"} component={ProfileTabs} />
     <RouteWithSidebar exact path={"/parts"} component={MyAllParts} />
     <RouteWithSidebar exact path={"/contact"} component={ContactPage} />
+    <RouteWithSidebar exact path={"/scedule"} component={Scedule} />
+
 
     {/* old */}
     <RouteWithSidebar

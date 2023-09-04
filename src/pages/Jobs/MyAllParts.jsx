@@ -20,7 +20,7 @@ const MyAllParts = () => {
   };
 
   return (
-    <div className="p-4 mt-4">
+    <div className="container mt-4">
       {myAllParts.length < 1 && !loading && (
         <p className="text-center"> No Parts Available ! </p>
       )}

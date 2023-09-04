@@ -55,7 +55,7 @@ const JobDetails = () => {
     }
   };
   return (
-    <div className="p-5">
+    <div className="container">
       <div className="row mt-5">
         {loading ? (
           <div className="mb-4">

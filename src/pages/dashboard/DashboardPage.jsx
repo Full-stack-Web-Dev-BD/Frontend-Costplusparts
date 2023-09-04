@@ -17,9 +17,8 @@ const DashboardPage = ({ auth }) => {
   const [previousJobHours, setPreviousJobHours] = useState([]);
   useEffect(() => {
     const fetchJob = async () => {
-      const userID = getUserID();
       try {
-        const response = await axios.get(`${BASE_URL}/api/job/user/${userID}`, {
+        const response = await axios.get(`${BASE_URL}/api/job/my-jobs`, {
           headers: authTokenInHeader(),
         });
         const response1 = await axios.get(`${BASE_URL}/api/job/latest`, {
@@ -217,6 +216,11 @@ const DashboardPage = ({ auth }) => {
                       </div>
                     </Link>
                   ))}
+                  {
+                    myJobs.length  <1 && <div className="text-center p-5">
+                      <h3> No Job  Founded </h3>
+                    </div>
+                  }
                 </>
               )}
               <div></div>

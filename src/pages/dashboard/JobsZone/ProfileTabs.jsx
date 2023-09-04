@@ -12,6 +12,8 @@ import axios from "axios";
 import { BASE_URL, authTokenInHeader } from "../../../utils/constant";
 import toast from "react-hot-toast";
 import { FaRegHandPointRight } from "react-icons/fa";
+import PaypalButton from "./PaypalButton";
+import PaypalModal from "./PaypalModal";
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -150,7 +152,7 @@ const ProfileTab = ({ auth }) => {
         </div>
       </Box>
       <CustomTabPanel value={value} index={0}>
-        <div className="p-5">
+        <div className="container">
           <div className="row">
             <div className="col-md-6">
               <Card className="p-4">
@@ -276,9 +278,7 @@ const ProfileTab = ({ auth }) => {
                           Cancel Premium and Subscribe Basic
                         </button>
                       ) : (
-                        <button onClick={(e) => upgradePlan("basic")}>
-                          Upgrade to Basic
-                        </button>
+                        <PaypalModal/>
                       )}
                     </div>
                   </div>
@@ -308,7 +308,7 @@ const ProfileTab = ({ auth }) => {
         </div>
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-        <div className="p-5">
+        <div className="container">
           <div className="row">
             <div className="col-md-6">
               <Card className="p-4">
@@ -390,7 +390,7 @@ const ProfileTab = ({ auth }) => {
         </div>
       </CustomTabPanel>
       <CustomTabPanel value={value} index={4}>
-        <div className="p-5">
+        <div className="container">
           <div className="row mt-5">
             <div className="col-md-4 cp">
               <div className="sc_job">
