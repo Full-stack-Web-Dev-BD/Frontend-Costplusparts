@@ -273,12 +273,8 @@ const ProfileTab = ({ auth }) => {
                     <div className="text-right update_profile">
                       {auth.user?.subscription?.plan == "basic" ? (
                         <button> Activated </button>
-                      ) : auth.user?.subscription?.plan == "premium" ? (
-                        <button onClick={(e) => upgradePlan("basic")}>
-                          Cancel Premium and Subscribe Basic
-                        </button>
                       ) : (
-                        <PaypalModal/>
+                        <PaypalModal title={"Upgrade to Basic"} />
                       )}
                     </div>
                   </div>
@@ -295,9 +291,7 @@ const ProfileTab = ({ auth }) => {
                       {auth.user?.subscription?.plan == "premium" ? (
                         <button> Activated </button>
                       ) : (
-                        <button onClick={(e) => upgradePlan("premium")}>
-                          Upgrade to Premium
-                        </button>
+                        <PaypalModal title={"Upgrade to Premium"} />
                       )}
                     </div>
                   </div>

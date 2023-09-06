@@ -1,7 +1,6 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import PaypalButton from "./PaypalButton";
 
@@ -17,7 +16,7 @@ const style = {
   p: 4,
 };
 
-export default function PaypalModal() {
+export default function PaypalModal({title}) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -28,7 +27,7 @@ export default function PaypalModal() {
         onClick={handleOpen}
         //    onClick={(e) => upgradePlan("basic")}
       >
-        Upgrade to Basic
+        {title}
       </button>
       <Modal
         open={open}
@@ -37,14 +36,16 @@ export default function PaypalModal() {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-            <div>
-                <h5>Select a payment mothod :</h5>
-                <hr/>
-                <PaypalButton/>
-                <p className="text-warning text-center"> Please wait until payment option load !</p>
-            </div>
           <div>
-            <Button onClick={handleOpen} variant="outlined">
+            <h5>Select a payment mothod :</h5>
+            <hr />
+            <PaypalButton />
+            <p className="text-warning text-center">
+              Please wait until payment option load !
+            </p>
+          </div>
+          <div>
+            <Button onClick={handleClose} variant="outlined">
               Close
             </Button>
           </div>

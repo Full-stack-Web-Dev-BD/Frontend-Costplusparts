@@ -86,7 +86,7 @@ const JobDetails = () => {
                           <h4> Start this job by clicking button below ! </h4>
                         )}
                         <h4>
-                          Time Used : {jobDetails.timeSpended.toFixed(3)}h /
+                          Time Used : {jobDetails.timeSpended.toFixed(2)}h /
                           {jobDetails.estimatedTimeToSpend}h
                         </h4>
                       </div>
