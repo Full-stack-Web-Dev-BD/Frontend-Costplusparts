@@ -44,7 +44,7 @@ const MyAllParts = () => {
                   <div className="material_box">
                     <img src={`${BASE_URL}/uploads/${parts.materialFile}.png`} />
                   </div>
-                  <div style={{ width: "100%" }}>
+                  <div style={{ width: "100%" }} className="single_parts">
                     <h2> {parts.serviceName ? parts.serviceName:'Parts  Service'} </h2>
                     <p className="m-0">Pump Manifold v3.step</p>
                     <div

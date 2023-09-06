@@ -58,7 +58,7 @@ const SceduleJobs = () => {
       console.log( "new",  error);
       if (error.response) {
         setErr(error.response?.data.message);
-        toast.error(error.response.data.errors[0].msg);
+        // toast.error(error.response.data.errors[0].msg);
       } else {
         toast.error("An error occurred while creating the job");
       }
@@ -78,7 +78,7 @@ const SceduleJobs = () => {
             className="form-control job_input"
           />
         </span>
-        {err ? <p className="text-center mt-4  text-danger"> <b>{err}</b>  </p> : ""}
+        {err ? <p className="text-center mt-4 text-danger"> <b>{err}</b>  </p> : ""}
 
         {title ? (
           <button onClick={(e) => createJob()} className="btn">

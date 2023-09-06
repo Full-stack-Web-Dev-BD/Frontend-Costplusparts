@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { Routes } from "../routes";
 
-// pages 
+// pages
 import Home from "./Home";
 import Upgrade from "./Upgrade";
 import Transactions from "./Transactions";
@@ -49,7 +49,7 @@ import Tooltips from "./components/Tooltips";
 import Toasts from "./components/Toasts";
 import Jobs from "./Jobs/Jobs";
 import SceduleJobs from "./Jobs/SceduleJobs";
-import DashboardPage  from "./dashboard/DashboardPage";
+import DashboardPage from "./dashboard/DashboardPage";
 import MaterialandQuestions from "./Jobs/MaterialandQuestions";
 // import Materials from './dashboard/JobsZone/Materials';
 // import UploadPart from './dashboard/JobsZone/UploadPart';
@@ -57,16 +57,16 @@ import MaterialandQuestions from "./Jobs/MaterialandQuestions";
 import FileUpload from "./dashboard/JobsZone/Upload/FileUpload";
 import ChooseService from "./dashboard/JobsZone/Parts/ChooseService";
 import ProfileTabs from "./dashboard/JobsZone/ProfileTabs";
-import {  useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { LOGIN_SUCCESS, SET_USER } from "../store/actions/actionTypes";
 import jwtDecode from "jwt-decode";
 import { NotAuthenticated } from "./examples/NotAuthenticated";
 import axios from "axios";
-import { BASE_URL,  authTokenInHeader } from "../utils/constant";
+import { BASE_URL, authTokenInHeader } from "../utils/constant";
 import JobDetails from "./dashboard/JobsZone/JobDetails";
 import MyAllParts from "./Jobs/MyAllParts";
 import ContactPage from "./dashboard/Contact/ContactPage";
-import "./app.css"
+import "./app.css";
 import SceduleHistory from "./dashboard/SceduleHistory/SceduleHistory";
 import Scedule from "./Jobs/Scedule";
 
@@ -103,7 +103,9 @@ const RouteWithSidebar = ({ component: Component, ...rest }) => {
     if (!userID) {
       return {};
     }
-    const response = await axios.get(`${BASE_URL}/api/users/${userID}`,{headers:authTokenInHeader()});
+    const response = await axios.get(`${BASE_URL}/api/users/${userID}`, {
+      headers: authTokenInHeader(),
+    });
     return response.data;
   };
   useEffect(() => {
@@ -115,7 +117,7 @@ const RouteWithSidebar = ({ component: Component, ...rest }) => {
         setAuthenticated(true);
         if (decodedToken?.user?.id) {
           const userDetails = await fetchUser(decodedToken?.user?.id);
-        dispatch({ type: SET_USER, payload: userDetails });
+          dispatch({ type: SET_USER, payload: userDetails });
         }
       }
     };
@@ -201,8 +203,16 @@ export default () => (
     <RouteWithSidebar exact path={"/jobs"} component={Jobs} />
     <RouteWithSidebar exact path={"/scedule-job"} component={SceduleJobs} />
     <RouteWithSidebar exact path="/job-details/:jobId" component={JobDetails} />
-    <RouteWithSidebar exact path={"/choose-service/:jobId"} component={ChooseService} />
-    <RouteWithSidebar exact path={"/upload-file/:jobId"} component={FileUpload} /> 
+    <RouteWithSidebar
+      exact
+      path={"/choose-service/:jobId"}
+      component={ChooseService}
+    />
+    <RouteWithSidebar
+      exact
+      path={"/upload-file/:jobId"}
+      component={FileUpload}
+    />
     <RouteWithSidebar
       exact
       path={"/material-and-questions/:partsID"}
@@ -212,7 +222,6 @@ export default () => (
     <RouteWithSidebar exact path={"/parts"} component={MyAllParts} />
     <RouteWithSidebar exact path={"/contact"} component={ContactPage} />
     <RouteWithSidebar exact path={"/scedule"} component={Scedule} />
-
 
     {/* old */}
     <RouteWithSidebar
