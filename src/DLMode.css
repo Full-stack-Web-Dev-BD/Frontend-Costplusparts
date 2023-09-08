@@ -4,9 +4,11 @@
     --light-dark: #1c1e53;
     --active-color: #17a2b8;
 }
+
 .content {
     min-height: 100vh;
 }
+
 .scrollbar-hidden::-webkit-scrollbar {
     display: none;
 }
@@ -33,7 +35,9 @@
 [data-theme-version="dark"] .single_parts p,
 [data-theme-version="dark"] .single_parts span,
 [data-theme-version="dark"] .single_parts h2,
-[data-theme-version="dark"] .contact_page h3 {
+[data-theme-version="dark"] .contact_page h3 ,
+[data-theme-version="dark"] .dropdown-item a 
+{
     color: var(--light-color) !important;
 }
 
@@ -46,7 +50,8 @@
 [data-theme-version="dark"] .navbar,
 [data-theme-version="dark"] .css-bhp9pd-MuiPaper-root-MuiCard-root,
 [data-theme-version="dark"] .css-11xur9t-MuiPaper-root-MuiTableContainer-root,
-[data-theme-version="dark"] .skeleton {
+[data-theme-version="dark"] .skeleton,
+[data-theme-version="dark"] .dropdown-menu {
     background-color: var(--light-dark);
 }
 
@@ -76,7 +81,7 @@
     border: 1px solid #17a2b8;
 }
 
-[data-theme-version="dark"] .input-group-text {
+[data-theme-version="dark"] .input-group-text{
     background-color: var(--light-dark);
 }
 
