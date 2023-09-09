@@ -53,13 +53,36 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   },
 }));
 function ModeSwitch(props) {
+  const [theme, setTheme] = React.useState('light');
+
+  // Function to toggle the theme
+  const toggleTheme = () => {
+    const newTheme = theme === 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
+    localStorage.setItem('theme', newTheme); // Store theme preference in localStorage
+  };
+
+  // Load the user's preferred theme from localStorage on component mount
+  React.useEffect(() => {
+    const storedTheme = localStorage.getItem('theme');
+    if (storedTheme) {
+      setTheme(storedTheme);
+    }
+  }, []);
+
+  // Apply the current theme class to the document body
+  React.useEffect(() => {
+    document.body.setAttribute('data-theme-version', theme);
+  }, [theme]);
   return (
+    <div>
     <FormGroup>
       <FormControlLabel
-        onClick={(e) => console.log(props.auth)}
+        onClick={(e) => toggleTheme() }
         control={<MaterialUISwitch sx={{ m: 1 }} defaultChecked />}
       />
     </FormGroup>
+    </div>
   );
 }
 const mapStateToProps = (state) => {

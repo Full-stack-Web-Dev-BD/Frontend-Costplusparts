@@ -7,6 +7,7 @@ import "./scss/volt.scss";
 import  { Toaster } from 'react-hot-toast';
 import "react-datetime/css/react-datetime.css";
 import "./custom.css"
+import "./DLMode.css"
 
 import HomePage from "./pages/HomePage";
 import ScrollToTop from "./components/ScrollToTop";

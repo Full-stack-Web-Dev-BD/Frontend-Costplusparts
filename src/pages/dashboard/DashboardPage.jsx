@@ -17,9 +17,8 @@ const DashboardPage = ({ auth }) => {
   const [previousJobHours, setPreviousJobHours] = useState([]);
   useEffect(() => {
     const fetchJob = async () => {
-      const userID = getUserID();
       try {
-        const response = await axios.get(`${BASE_URL}/api/job/user/${userID}`, {
+        const response = await axios.get(`${BASE_URL}/api/job/my-jobs`, {
           headers: authTokenInHeader(),
         });
         const response1 = await axios.get(`${BASE_URL}/api/job/latest`, {
@@ -35,15 +34,20 @@ const DashboardPage = ({ auth }) => {
     fetchJob();
   }, []);
   const calculatePercentage = (usedTime, totalTime) => {
+    console.log("usedTime, totalTime", usedTime, totalTime)
     if (usedTime > totalTime) return 100;
     var result =
       (usedTime ? parseInt(usedTime) / totalTime : 0 / totalTime) * 100;
-    console.log(result);
-    return result.toFixed(1);
+    var finalResult=  result.toFixed(1);
+    if(finalResult < 1){
+      return 0.6
+    }else{
+      return finalResult
+    }
   };
   return (
     <div className="mt-4  p-3">
-      <div className="row h-100 p-3">
+      <div className="row h-100 p-3"> 
         {Loading ? (
           <div className="col-12">
             <PartsPreloader />
@@ -59,15 +63,17 @@ const DashboardPage = ({ auth }) => {
                         spended={Math.floor(
                           calculatePercentage(
                             auth.user?.subscription?.usage.toFixed(0),
-                            parseInt(auth.user?.subscription?.features[0])
+                            parseInt(auth.user?.subscription?.time)
                           )
                         )}
                       />
                       <span>
-                        {Math.floor(calculatePercentage(
-                          auth.user?.subscription?.usage.toFixed(0),
-                          parseInt(auth.user?.subscription?.features[0])
-                        ))}
+                        {Math.floor(
+                          calculatePercentage(
+                            auth.user?.subscription?.usage.toFixed(0),
+                            parseInt(auth.user?.subscription?.time)
+                          )
+                        )}
                         %
                       </span>
                     </div>
@@ -77,7 +83,7 @@ const DashboardPage = ({ auth }) => {
                     <h5>
                       {auth.user?.subscription?.usage.toFixed(0)}
                       <span className="hrs">hrs</span> /
-                      <span> {auth.user?.subscription?.features[0]} </span>
+                      <span> {auth.user?.subscription?.time} </span>
                     </h5>
                   </div>
                 </div>
@@ -194,10 +200,12 @@ const DashboardPage = ({ auth }) => {
                                 )}
                               />
                               <span>
-                                {Math.floor(calculatePercentage(
-                                  job.timeSpended,
-                                  job.estimatedTimeToSpend
-                                ))}
+                                {Math.floor(
+                                  calculatePercentage(
+                                    job.timeSpended,
+                                    job.estimatedTimeToSpend
+                                  )
+                                )}
                                 %
                               </span>
                             </div>
@@ -217,6 +225,11 @@ const DashboardPage = ({ auth }) => {
                       </div>
                     </Link>
                   ))}
+                  {myJobs.length < 1 && (
+                    <div className="text-center p-5">
+                      <h3> No Job Founded </h3>
+                    </div>
+                  )}
                 </>
               )}
               <div></div>

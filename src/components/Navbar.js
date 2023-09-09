@@ -104,8 +104,8 @@ const CustomNavbar = ({ auth }) => {
                   className="media d-flex align-items-center"
                   style={{ gap: "10px" }}
                 >
-                  <div className="media-body ms-2 text-dark align-items-center d-none d-lg-block">
-                    <span>
+                  <div className="media-body ms-2  align-items-center d-none d-lg-block">
+                    <span style={{color:'#161842'}}>
                       {auth.user?.firstname + " " + auth.user?.lastname}
                     </span>
                     <br />

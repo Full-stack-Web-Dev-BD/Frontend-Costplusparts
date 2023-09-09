@@ -5,12 +5,14 @@ import { Link } from "react-router-dom";
 import { BASE_URL,authTokenInHeader, getUserID } from "../../utils/constant";
 import moment from "moment";
 import JobPreloader from "../../components/JobPreloader/JobPreloader";
-const Jobs = () => {
+import FilterBar from "../dashboard/Components/FIlterBar";
+const Scedule = () => {
   const [myJobs, setMyJobs] = useState([]);
   const [Loading, setLoading] = useState(true);
   useEffect(() => {
     const fetchJob = async () => {
-      const response = await axios.get(`${BASE_URL}/api/job/my-jobs`, {
+      const userID = getUserID();
+      const response = await axios.get(`${BASE_URL}/api/job/user/${userID}`, {
         headers: authTokenInHeader(),
       });
       setMyJobs(response.data);
@@ -20,8 +22,11 @@ const Jobs = () => {
   }, []);
   return (
     <div className="container">
+      <div>
+        <FilterBar/>
+      </div>
       <div className="row mt-5">
-        <div className="col-md-4 mb-4 cp">
+        {/* <div className="col-md-4 mb-4 cp">
           <Link to={"/scedule-job"}>
             <div className="sc_job">
               <div className="sc_jobs_content tex-center">
@@ -31,7 +36,7 @@ const Jobs = () => {
               </div>
             </div>
           </Link>
-        </div>
+        </div> */}
         {Loading ? (
           <>
             {[1, 2].map((el) => (
@@ -64,4 +69,4 @@ const Jobs = () => {
   );
 };
 
-export default Jobs;
+export default Scedule;

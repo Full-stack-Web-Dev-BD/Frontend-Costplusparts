@@ -20,7 +20,7 @@ const MyAllParts = () => {
   };
 
   return (
-    <div className="p-4 mt-4">
+    <div className="container mt-4">
       {myAllParts.length < 1 && !loading && (
         <p className="text-center"> No Parts Available ! </p>
       )}
@@ -44,7 +44,7 @@ const MyAllParts = () => {
                   <div className="material_box">
                     <img src={`${BASE_URL}/uploads/${parts.materialFile}.png`} />
                   </div>
-                  <div style={{ width: "100%" }}>
+                  <div style={{ width: "100%" }} className="single_parts">
                     <h2> {parts.serviceName ? parts.serviceName:'Parts  Service'} </h2>
                     <p className="m-0">Pump Manifold v3.step</p>
                     <div
