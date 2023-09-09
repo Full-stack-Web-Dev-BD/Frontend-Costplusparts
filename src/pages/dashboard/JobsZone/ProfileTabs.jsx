@@ -11,10 +11,6 @@ import { connect } from "react-redux";
 import axios from "axios";
 import { BASE_URL, authTokenInHeader } from "../../../utils/constant";
 import toast from "react-hot-toast";
-import { FaRegHandPointRight } from "react-icons/fa";
-import PaypalButton from "./PaypalButton";
-import PaypalModal from "./PaypalModal";
-
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -117,21 +113,7 @@ const ProfileTab = ({ auth }) => {
       }
     }
   };
-  const upgradePlan = async (plan) => {
-    try {
-      const response = await axios.put(
-        `${BASE_URL}/api/users/plan`,
-        { newPlan: plan },
-        { headers: authTokenInHeader() }
-      );
-      toast.success(`Subscription successfully to ${plan} Plan `);
-      setTimeout(() => {
-        window.location.reload();
-      }, 2000);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+
 
   return (
     <Box sx={{ width: "100%", marginTop: "30px" }}>

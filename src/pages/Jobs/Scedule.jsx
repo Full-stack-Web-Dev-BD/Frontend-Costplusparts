@@ -11,8 +11,7 @@ const Scedule = () => {
   const [Loading, setLoading] = useState(true);
   useEffect(() => {
     const fetchJob = async () => {
-      const userID = getUserID();
-      const response = await axios.get(`${BASE_URL}/api/job/user/${userID}`, {
+      const response = await axios.get(`${BASE_URL}/api/job/my-jobs`, {
         headers: authTokenInHeader(),
       });
       setMyJobs(response.data);

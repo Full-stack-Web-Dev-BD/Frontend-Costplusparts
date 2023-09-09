@@ -67,7 +67,6 @@ import JobDetails from "./dashboard/JobsZone/JobDetails";
 import MyAllParts from "./Jobs/MyAllParts";
 import ContactPage from "./dashboard/Contact/ContactPage";
 import "./app.css";
-import SceduleHistory from "./dashboard/SceduleHistory/SceduleHistory";
 import Scedule from "./Jobs/Scedule";
 import Subscription from "./dashboard/Subscription/Subscription";
 
