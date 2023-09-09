@@ -69,6 +69,7 @@ import ContactPage from "./dashboard/Contact/ContactPage";
 import "./app.css";
 import SceduleHistory from "./dashboard/SceduleHistory/SceduleHistory";
 import Scedule from "./Jobs/Scedule";
+import Subscription from "./dashboard/Subscription/Subscription";
 
 const RouteWithLoader = ({ component: Component, ...rest }) => {
   const [loaded, setLoaded] = useState(false);
@@ -222,6 +223,7 @@ export default () => (
     <RouteWithSidebar exact path={"/parts"} component={MyAllParts} />
     <RouteWithSidebar exact path={"/contact"} component={ContactPage} />
     <RouteWithSidebar exact path={"/scedule"} component={Scedule} />
+    <RouteWithSidebar exact path={"/subscription"} component={Subscription} />
 
     {/* old */}
     <RouteWithSidebar

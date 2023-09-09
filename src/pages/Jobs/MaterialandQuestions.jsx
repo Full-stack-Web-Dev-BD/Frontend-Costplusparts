@@ -76,7 +76,7 @@ const MaterialandQuestions = () => {
               />
             </div>
             <div style={{ width: "100%" }}>
-              <h2> {partsDetails.serviceName} </h2> 
+              <h2 className="p_s_name"> {partsDetails.serviceName} </h2> 
               <div
                 className="d-flex"
                 style={{
@@ -84,11 +84,11 @@ const MaterialandQuestions = () => {
                   alignItems: "center",
                 }}
               >
-                <span>{partsDetails.materialFile}</span>
+                <span className="p_mFile">{partsDetails.materialFile}</span>
                 <div
                   style={{ display: "flex", gap: "20px", alignItems: "center" }}
                 >
-                  <span>
+                  <span className="p_qty">
                     Quantity : <b>{materialCount}</b>
                   </span>
                   <button className="btn border-btn">
@@ -98,9 +98,9 @@ const MaterialandQuestions = () => {
               </div>
               <hr className="m-0" />
               <p>
-                <span className="mr-3"> X: {partsDetails.dimention[0]}mm </span>
-                <span className="mr-3"> Y: {partsDetails.dimention[1]}mm</span>
-                <span className="mr-3"> Z: {partsDetails.dimention[2]}mm</span>
+                <span className="dir_count mr-3"> X: {partsDetails.dimention[0]}mm </span>
+                <span className="dir_count mr-3"> Y: {partsDetails.dimention[1]}mm</span>
+                <span className="dir_count mr-3"> Z: {partsDetails.dimention[2]}mm</span>
               </p>
             </div>
           </div>
@@ -362,7 +362,7 @@ const MaterialandQuestions = () => {
         <>
           {!loading && (
             <div className="mt-4">
-              <Card className="p-5">
+              <Card className="p-5 m_conf">
                 <h2 className="text-gray"> Material Configuration</h2>
                 <div class="form-group row " style={{ marginBottom: "2rem" }}>
                   <label for="inputPassword" class="col-sm-2 col-form-label">

@@ -63,7 +63,7 @@ const JobDetails = () => {
           </div>
         ) : (
           <div className="col-md-12 mb-4">
-            <Card>
+            <Card className="job_details">
               <div
                 className="row"
                 style={{ display: "flex", alignItems: "center" }}
@@ -214,7 +214,7 @@ const JobDetails = () => {
         </div> */}
       </div>
       {!loading && allParts.length < 1 && (
-        <h4 className="text-center my-4"> No Parts Created yet </h4>
+        <h4 className="text-center dl_text my-4"> No Parts Created yet </h4>
       )}
     </div>
   );

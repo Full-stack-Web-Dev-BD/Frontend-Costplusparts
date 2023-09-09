@@ -49,9 +49,11 @@
     font-size: 18px !important;
     font-weight: 500 !important;
 }
-
-.css-1h9z7r5-MuiButtonBase-root-MuiTab-root.Mui-selected {
+[data-theme-version="light"] .css-1h9z7r5-MuiButtonBase-root-MuiTab-root.Mui-selected {
     color: #1C1E53 !important;
+}
+[data-theme-version="dark"] .css-1h9z7r5-MuiButtonBase-root-MuiTab-root.Mui-selected {
+    color: #17a2b8 !important;
 }
 
 .css-1aquho2-MuiTabs-indicator {

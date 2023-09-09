@@ -153,16 +153,18 @@ const ProfileTab = ({ auth }) => {
       </Box>
       <CustomTabPanel value={value} index={0}>
         <div className="container">
-          <div className="row">
-            <div className="col-md-6">
+          <div className="row" style={{ alignItems: "center" }}>
+            <div className="col-md-6 h-100">
               <Card className="p-4">
                 <p>
                   <div className=" mb-4">
-                    <Typography variant="h4">Profile Details</Typography>
+                    <Typography variant="h4" className="dl_text">
+                      Profile Details
+                    </Typography>
                   </div>
                 </p>
                 <p>
-                  <div className="row">
+                  <div className="row dl_form">
                     <div className="col-md-6 mb-4">
                       <label className=" m-0">First Name</label>
                       <input
@@ -240,31 +242,100 @@ const ProfileTab = ({ auth }) => {
                 </div>
               </Card>
             </div>
-            <div className="col-md-6">
-              <Card className="p-4">
-                <div className=" mb-4">
-                  <div>
-                    <h4 className="m-0">
-                      Your Current Plan is
-                      <span
-                        style={{
-                          textTransform: "capitalize",
-                          padding: "10px 30px",
-                          margin: " 0 10px",
-                        }}
-                        className="badge badge-info"
-                      >
-                        {auth.user?.subscription?.plan}
-                      </span>
-                    </h4>
-                    {auth.user?.subscription?.features?.map((feature) => (
-                      <p>
-                        <small> {feature} </small>
-                      </p>
-                    ))}
+            <div className="col-md-6 h-100">
+              <Card className=" dl_form">
+                <section className="pricing_section" style={{ padding: "0" }}>
+                  <div className="outer-box">
+                    {/* <div className="pricing-block col-lg-4 col-md-6 col-sm-12 wow fadeInUp">
+                              <div className="inner-box" style={{width:'100%'}}>
+                                <div className="icon-box">
+                                  <div className="icon-outer">
+                                    <i className="fas fa-paper-plane" />
+                                  </div>
+                                </div>
+                                <div className="price-box">
+                                  <div className="title"> Free </div>
+                                  <h4 className="price">$0.00</h4>
+                                </div>
+                                <ul className="features">
+                                  <li className="true">Montly 10 hours </li>
+                                  <li className="true">
+                                    Free Lunch And Coffee
+                                  </li>
+                                  <li className="true">Certificate</li>
+                                  <li className="false">Easy Access</li>
+                                  <li className="false">Free Contacts</li>
+                                </ul>
+                                <div className="btn-box">
+                                  <button className="btn theme-btn">
+                                    Sign Up
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                            <div
+                              className="pricing-block col-lg-4 col-md-6 col-sm-12 wow fadeInUp"
+                              data-wow-delay="400ms"
+                            >
+                              <div className="inner-box" style={{width:'100%'}}>
+                                <div className="icon-box">
+                                  <div className="icon-outer">
+                                    <i className="fas fa-gem" />
+                                  </div>
+                                </div>
+                                <div className="price-box">
+                                  <div className="title">Standard</div>
+                                  <h4 className="price">$99.99</h4>
+                                </div>
+                                <ul className="features">
+                                  <li className="true">Montly 30 hours </li>
+                                  <li className="true">
+                                    Free Lunch And Coffee
+                                  </li>
+                                  <li className="true">Certificate</li>
+                                  <li className="true">Easy Access</li>
+                                  <li className="false">Free Contacts</li>
+                                </ul>
+                                <div className="btn-box">
+                                  <button className="btn theme-btn">
+                                    Subscribe
+                                  </button>
+                                </div>
+                              </div>
+                            </div> */}
+                    <div
+                      className="pricing-block col-12 wow fadeInUp"
+                      data-wow-delay="800ms"
+                      style={{ margin: "0", padding: "0" }}
+                    >
+                      <div className="inner-box" style={{ maxWidth: "100%" }}>
+                        <div className="icon-box">
+                          <div className="icon-outer">
+                            <i className="fas fa-rocket" />
+                          </div>
+                        </div>
+                        <div className="price-box">
+                          <i style={{ color: "#222222 !important" }}>
+                            Your Current Plan is{" "}
+                          </i>
+                          <div className="title">Premium</div>
+                          <h4 className="price">$199.99</h4>
+                        </div>
+                        <ul className="features">
+                          <li className="true">Montly 300 hours </li>
+                          <li className="true">Free Lunch And Coffee</li>
+                          <li className="true">Certificate</li>
+                          <li className="true">Easy Access</li>
+                          <li className="true">Free Contacts</li>
+                        </ul>
+                        <div className="btn-box  ">
+                          <button className="btn theme-btn"> Activated </button>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <hr />
-                  <div className="pt-4 pb-4">
+                </section>
+                {/* <div className="pt-4 pb-4 dl_form">
                     <h5 onClick={(e) => console.log(auth)}> Basic Plan</h5>
                     <p>
                       <FaRegHandPointRight />
@@ -294,8 +365,7 @@ const ProfileTab = ({ auth }) => {
                         <PaypalModal title={"Upgrade to Premium"} />
                       )}
                     </div>
-                  </div>
-                </div>
+                  </div> */}
               </Card>
             </div>
           </div>
@@ -309,7 +379,7 @@ const ProfileTab = ({ auth }) => {
                 <div className=" mb-4">
                   <h4>Change Password</h4>
                 </div>
-                <div className="row">
+                <div className="row dl_form">
                   <div className="col-md-12 mb-4">
                     <label className=" m-0">Old Password</label>
                     <input
@@ -388,7 +458,7 @@ const ProfileTab = ({ auth }) => {
           <div className="row mt-5">
             <div className="col-md-4 cp">
               <div className="sc_job">
-                <Link to={"/upload/material"}>
+                <Link to={"/jobs"}>
                   <div className="sc_jobs_content tex-center">
                     <AiOutlinePlus style={{ color: "black" }} />
                     <br />

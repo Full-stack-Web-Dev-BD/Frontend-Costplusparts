@@ -36,7 +36,23 @@
 [data-theme-version="dark"] .single_parts span,
 [data-theme-version="dark"] .single_parts h2,
 [data-theme-version="dark"] .contact_page h3 ,
-[data-theme-version="dark"] .dropdown-item a 
+[data-theme-version="dark"] .dropdown-item a ,
+[data-theme-version="dark"] .pricing_section .sec-title h2 ,
+[data-theme-version="dark"] .dir_count ,
+[data-theme-version="dark"] .p_qty ,
+[data-theme-version="dark"] .p_s_name ,
+[data-theme-version="dark"] .p_mFile ,
+[data-theme-version="dark"] .form-group label ,
+[data-theme-version="dark"] .text-gray ,
+[data-theme-version="dark"] .job_details p ,
+[data-theme-version="dark"] .job_details h4 ,
+[data-theme-version="dark"] .dl_text ,
+[data-theme-version="dark"] .css-heg063-MuiTabs-flexContainer button ,
+[data-theme-version="dark"] .dl_form label ,
+[data-theme-version="dark"] .dl_form h4 ,
+[data-theme-version="dark"] .dl_form h5 ,
+[data-theme-version="dark"] .dl_form p ,
+[data-theme-version="dark"] .dl_form p small 
 {
     color: var(--light-color) !important;
 }
@@ -51,7 +67,9 @@
 [data-theme-version="dark"] .css-bhp9pd-MuiPaper-root-MuiCard-root,
 [data-theme-version="dark"] .css-11xur9t-MuiPaper-root-MuiTableContainer-root,
 [data-theme-version="dark"] .skeleton,
-[data-theme-version="dark"] .dropdown-menu {
+[data-theme-version="dark"] .dropdown-menu ,
+[data-theme-version="dark"] .css-1gsv261
+{
     background-color: var(--light-dark);
 }
 
