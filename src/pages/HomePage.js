@@ -67,6 +67,7 @@ import JobDetails from "./dashboard/JobsZone/JobDetails";
 import MyAllParts from "./Jobs/MyAllParts";
 import ContactPage from "./dashboard/Contact/ContactPage";
 import "./app.css";
+import AppManagement from "./dashboard/Admin/AppManagement";
 
 const RouteWithLoader = ({ component: Component, ...rest }) => {
   const [loaded, setLoaded] = useState(false);
@@ -74,6 +75,30 @@ const RouteWithLoader = ({ component: Component, ...rest }) => {
   useEffect(() => {
     const timer = setTimeout(() => setLoaded(true), 1000);
     return () => clearTimeout(timer);
+  }, []);
+
+  return (
+    <Route
+      {...rest}
+      render={(props) => (
+        <>
+          {" "}
+          <Preloader show={loaded ? false : true} /> <Component {...props} />{" "}
+        </>
+      )}
+    />
+  );
+};
+
+const AdminRouteWithLoader = ({ user, component: Component, ...rest }) => {
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    if (!user?.isAdmin) {
+      window.location.href = "/#/examples/404";
+    } else {
+      setLoaded(true);
+    }
   }, []);
 
   return (
@@ -167,11 +192,11 @@ const RouteWithSidebar = ({ component: Component, ...rest }) => {
 const HomePage = ({ auth }) => (
   <>
     <Switch>
-      {/* {auth?.user?.isAdmin && (
-        <>
-          <RouteWithLoader exact path={"/app-management"} component={Home} />
-        </>
-      )} */}
+      <RouteWithLoader
+        exact
+        path={"/app-management"}
+        component={AppManagement}
+      />
       <RouteWithLoader exact path={Routes.Home.path} component={Home} />
       <RouteWithLoader exact path={Routes.Signin.path} component={Signin} />
       <RouteWithLoader exact path={Routes.Signup.path} component={Signup} />
