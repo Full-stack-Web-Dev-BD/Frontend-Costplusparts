@@ -55,7 +55,7 @@ const JobDetails = () => {
     }
   };
   return (
-    <div className="p-5">
+    <div className="container">
       <div className="row mt-5">
         {loading ? (
           <div className="mb-4">
@@ -63,7 +63,7 @@ const JobDetails = () => {
           </div>
         ) : (
           <div className="col-md-12 mb-4">
-            <Card>
+            <Card className="job_details">
               <div
                 className="row"
                 style={{ display: "flex", alignItems: "center" }}
@@ -86,7 +86,7 @@ const JobDetails = () => {
                           <h4> Start this job by clicking button below ! </h4>
                         )}
                         <h4>
-                          Time Used : {jobDetails.timeSpended.toFixed(3)}h /
+                          Time Used : {jobDetails.timeSpended.toFixed(2)}h /
                           {jobDetails.estimatedTimeToSpend}h
                         </h4>
                       </div>
@@ -214,7 +214,7 @@ const JobDetails = () => {
         </div> */}
       </div>
       {!loading && allParts.length < 1 && (
-        <h4 className="text-center my-4"> No Parts Created yet </h4>
+        <h4 className="text-center dl_text my-4"> No Parts Created yet </h4>
       )}
     </div>
   );

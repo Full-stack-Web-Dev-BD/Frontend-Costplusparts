@@ -8,10 +8,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
-
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
+ 
 
 export default function PreviousJobHours({ previousJobHours }) {
   return (
@@ -55,6 +52,12 @@ export default function PreviousJobHours({ previousJobHours }) {
               </TableCell>
             </TableRow>
           ))}
+          {
+            previousJobHours.length < 1 && 
+            <td colSpan="4">
+              <h3 className="m-4 text-center"> No Record Finded </h3>
+            </td>
+          } 
         </TableBody>
       </Table>
     </TableContainer>
