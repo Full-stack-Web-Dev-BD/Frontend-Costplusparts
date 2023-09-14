@@ -19,7 +19,7 @@ const DashboardPage = ({ auth }) => {
     const fetchJob = async () => {
       const userID = getUserID();
       try {
-        const response = await axios.get(`${BASE_URL}/api/job/user/${userID}`, {
+        const response = await axios.get(`${BASE_URL}/api/job/my-jobs`, {
           headers: authTokenInHeader(),
         });
         const response1 = await axios.get(`${BASE_URL}/api/job/latest`, {

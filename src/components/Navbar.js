@@ -8,6 +8,7 @@ import {
   faSearch,
   faSignOutAlt,
   faUserShield,
+  faRocket,
 } from "@fortawesome/free-solid-svg-icons";
 import { GrUpgrade } from "react-icons/gr";
 import { faUserCircle } from "@fortawesome/free-regular-svg-icons";
@@ -138,9 +139,18 @@ const CustomNavbar = ({ auth }) => {
                     Profile
                   </Link>
                 </Dropdown.Item>
+                {auth.user.isAdmin && (
+                  <Dropdown.Item className="fw-bold">
+                    <Link to={"/app-management"}>
+                      <FontAwesomeIcon icon={faRocket} className="me-2" />{" "}
+                      Manage App
+                    </Link>
+                  </Dropdown.Item>
+                )}
                 <Dropdown.Item className="fw-bold">
                   <FontAwesomeIcon icon={faCog} className="me-2" /> Settings
                 </Dropdown.Item>
+
                 <Dropdown.Item className="fw-bold">
                   <FontAwesomeIcon icon={faEnvelopeOpen} className="me-2" />
                   Messages
