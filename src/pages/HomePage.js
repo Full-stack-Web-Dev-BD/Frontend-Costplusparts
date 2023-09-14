@@ -57,7 +57,7 @@ import MaterialandQuestions from "./Jobs/MaterialandQuestions";
 import FileUpload from "./dashboard/JobsZone/Upload/FileUpload";
 import ChooseService from "./dashboard/JobsZone/Parts/ChooseService";
 import ProfileTabs from "./dashboard/JobsZone/ProfileTabs";
-import { useDispatch } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import { LOGIN_SUCCESS, SET_USER } from "../store/actions/actionTypes";
 import jwtDecode from "jwt-decode";
 import { NotAuthenticated } from "./examples/NotAuthenticated";
@@ -69,6 +69,7 @@ import ContactPage from "./dashboard/Contact/ContactPage";
 import "./app.css";
 import Scedule from "./Jobs/Scedule";
 import Subscription from "./dashboard/Subscription/Subscription";
+import AppManagement from "./dashboard/Admin/AppManagement";
 
 const RouteWithLoader = ({ component: Component, ...rest }) => {
   const [loaded, setLoaded] = useState(false);
@@ -190,10 +191,10 @@ const RouteWithSidebar = ({ component: Component, ...rest }) => {
     />
   );
 };
-const HomePage = ({ auth }) => (
+const HomePage = () => (
   <>
     <Switch>
-      <RouteWithLoader
+      <RouteWithSidebar
         exact
         path={"/app-management"}
         component={AppManagement}
@@ -359,10 +360,5 @@ const HomePage = ({ auth }) => (
       <Redirect to={Routes.NotFound.path} />
     </Switch>
   </>
-);
-const mapStateToProps = (state) => {
-  return {
-    auth: state.auth,
-  };
-};
-export default connect(mapStateToProps, null)(HomePage);
+); 
+export default HomePage;

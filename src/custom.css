@@ -1,4 +1,12 @@
 /* shortcut */
+.bg_common_button{
+    background-color: #1c1e53 !important;
+    color: white !important;
+    text-transform: capitalize !important;
+}
+.bg_common_button svg{
+    font-size: 24px ;
+}
 .y_center{
     display: flex;
     flex-direction: column;
