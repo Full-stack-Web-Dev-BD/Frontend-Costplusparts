@@ -114,7 +114,6 @@ const ProfileTab = ({ auth }) => {
     }
   };
 
-
   return (
     <Box sx={{ width: "100%", marginTop: "30px" }}>
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
@@ -228,93 +227,98 @@ const ProfileTab = ({ auth }) => {
               <Card className=" dl_form">
                 <section className="pricing_section" style={{ padding: "0" }}>
                   <div className="outer-box">
-                    {/* <div className="pricing-block col-lg-4 col-md-6 col-sm-12 wow fadeInUp">
-                              <div className="inner-box" style={{width:'100%'}}>
-                                <div className="icon-box">
-                                  <div className="icon-outer">
-                                    <i className="fas fa-paper-plane" />
-                                  </div>
-                                </div>
-                                <div className="price-box">
-                                  <div className="title"> Free </div>
-                                  <h4 className="price">$0.00</h4>
-                                </div>
-                                <ul className="features">
-                                  <li className="true">Montly 10 hours </li>
-                                  <li className="true">
-                                    Free Lunch And Coffee
-                                  </li>
-                                  <li className="true">Certificate</li>
-                                  <li className="false">Easy Access</li>
-                                  <li className="false">Free Contacts</li>
-                                </ul>
-                                <div className="btn-box">
-                                  <button className="btn theme-btn">
-                                    Sign Up
-                                  </button>
-                                </div>
-                              </div>
+                    {auth.user?.subscription?.plan == "free" && (
+                      <div
+                        className="pricing-block col-12 wow fadeInUp"
+                        style={{ margin: "0", padding: "0" }}
+                      >
+                        <div className="inner-box" style={{ maxWidth: "100%" }}>
+                          <div className="icon-box">
+                            <div className="icon-outer">
+                              <i className="fas fa-paper-plane" />
                             </div>
-                            <div
-                              className="pricing-block col-lg-4 col-md-6 col-sm-12 wow fadeInUp"
-                              data-wow-delay="400ms"
-                            >
-                              <div className="inner-box" style={{width:'100%'}}>
-                                <div className="icon-box">
-                                  <div className="icon-outer">
-                                    <i className="fas fa-gem" />
-                                  </div>
-                                </div>
-                                <div className="price-box">
-                                  <div className="title">Standard</div>
-                                  <h4 className="price">$99.99</h4>
-                                </div>
-                                <ul className="features">
-                                  <li className="true">Montly 30 hours </li>
-                                  <li className="true">
-                                    Free Lunch And Coffee
-                                  </li>
-                                  <li className="true">Certificate</li>
-                                  <li className="true">Easy Access</li>
-                                  <li className="false">Free Contacts</li>
-                                </ul>
-                                <div className="btn-box">
-                                  <button className="btn theme-btn">
-                                    Subscribe
-                                  </button>
-                                </div>
-                              </div>
-                            </div> */}
-                    <div
-                      className="pricing-block col-12 wow fadeInUp"
-                      data-wow-delay="800ms"
-                      style={{ margin: "0", padding: "0" }}
-                    >
-                      <div className="inner-box" style={{ maxWidth: "100%" }}>
-                        <div className="icon-box">
-                          <div className="icon-outer">
-                            <i className="fas fa-rocket" />
+                          </div>
+                          <div className="price-box">
+                            <div className="title"> Free </div>
+                            <h4 className="price">$0.00</h4>
+                          </div>
+                          <ul className="features">
+                            <li className="true">Montly 10 hours </li>
+                            <li className="true">Free Lunch And Coffee</li>
+                            <li className="true">Certificate</li>
+                            <li className="false">Easy Access</li>
+                            <li className="false">Free Contacts</li>
+                          </ul>
+                          <div className="btn-box">
+                            <button className="btn theme-btn">Activated</button>
                           </div>
                         </div>
-                        <div className="price-box">
-                          <i style={{ color: "#222222 !important" }}>
-                            Your Current Plan is{" "}
-                          </i>
-                          <div className="title">Premium</div>
-                          <h4 className="price">$199.99</h4>
-                        </div>
-                        <ul className="features">
-                          <li className="true">Montly 300 hours </li>
-                          <li className="true">Free Lunch And Coffee</li>
-                          <li className="true">Certificate</li>
-                          <li className="true">Easy Access</li>
-                          <li className="true">Free Contacts</li>
-                        </ul>
-                        <div className="btn-box  ">
-                          <button className="btn theme-btn"> Activated </button>
+                      </div>
+                    )}
+                    {auth.user?.subscription?.plan == "basic" && (
+                      <div
+                        className="pricing-block col-12 wow fadeInUp"
+                        style={{ margin: "0", padding: "0" }}
+                        data-wow-delay="400ms"
+                      >
+                        <div className="inner-box" style={{ maxWidth: "100%" }}>
+                          <div className="icon-box">
+                            <div className="icon-outer">
+                              <i className="fas fa-gem" />
+                            </div>
+                          </div>
+                          <div className="price-box">
+                            <div className="title">Basic</div>
+                            <h4 className="price">$99.99</h4>
+                          </div>
+                          <ul className="features">
+                            <li className="true">Montly 30 hours </li>
+                            <li className="true">Free Lunch And Coffee</li>
+                            <li className="true">Certificate</li>
+                            <li className="true">Easy Access</li>
+                            <li className="false">Free Contacts</li>
+                          </ul>
+                          <div className="btn-box">
+                            <button className="btn theme-btn">Activated</button>
+                          </div>
                         </div>
                       </div>
-                    </div>
+                    )}
+                    {auth.user?.subscription?.plan == "premium" && (
+                      <div
+                        className="pricing-block col-12 wow fadeInUp"
+                        data-wow-delay="800ms"
+                        style={{ margin: "0", padding: "0" }}
+                      >
+                        <div className="inner-box" style={{ maxWidth: "100%" }}>
+                          <div className="icon-box">
+                            <div className="icon-outer">
+                              <i className="fas fa-rocket" />
+                            </div>
+                          </div>
+                          <div className="price-box">
+                            <i style={{ color: "#222222 !important" }}>
+                              Your Current Plan is{" "}
+                            </i>
+                            <div className="title">Premium</div>
+                            <h4 className="price">$199.99</h4>
+                          </div>
+                          <ul className="features">
+                            <li className="true">Montly 300 hours </li>
+                            <li className="true">Free Lunch And Coffee</li>
+                            <li className="true">Certificate</li>
+                            <li className="true">Easy Access</li>
+                            <li className="true">Free Contacts</li>
+                          </ul>
+                          <div className="btn-box  ">
+                            <button className="btn theme-btn">
+                              {" "}
+                              Activated{" "}
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </section>
                 {/* <div className="pt-4 pb-4 dl_form">
