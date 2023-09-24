@@ -20,6 +20,7 @@ const MaterialandQuestions = () => {
   const [Finish, setFinish] = useState("");
   const [Orientation, setOrientation] = useState("");
   const [Material, setMaterial] = useState("");
+  const [materialList, setmaterialList] = useState([]);
 
   const decreaseMaterialCount = () => {
     if (materialCount > 0) {
@@ -27,8 +28,19 @@ const MaterialandQuestions = () => {
     }
   };
   useEffect(() => {
+    fetchMaterials();
     fetchPartsDetails();
   }, []);
+  const fetchMaterials = async () => {
+    try {
+      const response = await axios.get(`${BASE_URL}/api/admin/material`, {
+        headers: authTokenInHeader(),
+      });
+      setmaterialList(response.data);
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
   const fetchPartsDetails = async () => {
     try {
       const response = await axios.get(
@@ -76,7 +88,7 @@ const MaterialandQuestions = () => {
               />
             </div>
             <div style={{ width: "100%" }}>
-              <h2 className="p_s_name"> {partsDetails.serviceName} </h2> 
+              <h2 className="p_s_name"> {partsDetails.serviceName} </h2>
               <div
                 className="d-flex"
                 style={{
@@ -98,9 +110,15 @@ const MaterialandQuestions = () => {
               </div>
               <hr className="m-0" />
               <p>
-                <span className="dir_count mr-3"> X: {partsDetails.dimention[0]}mm </span>
-                <span className="dir_count mr-3"> Y: {partsDetails.dimention[1]}mm</span>
-                <span className="dir_count mr-3"> Z: {partsDetails.dimention[2]}mm</span>
+                <span className="dir_count mr-3">
+                  X: {partsDetails.dimention[0]}mm
+                </span>
+                <span className="dir_count mr-3">
+                  Y: {partsDetails.dimention[1]}mm
+                </span>
+                <span className="dir_count mr-3">
+                  Z: {partsDetails.dimention[2]}mm
+                </span>
               </p>
             </div>
           </div>
@@ -122,123 +140,12 @@ const MaterialandQuestions = () => {
                   style={{ borderRadius: "0px" }}
                 >
                   <option value="">Select Material Option</option>
-                  <option value="" className="optoin_header">
-                    Direct Metal Laser Sintering (DMLS)
-                  </option>
-                  <option value="Aluminum AlSi10Mg">Aluminum AlSi10Mg</option>
-                  <option value="Aluminum AlSi10Mg (X Line)">
-                    Aluminum AlSi10Mg (X Line)
-                  </option>
-                  <option value="Cobalt Chrome">Cobalt Chrome</option>
-                  <option value="Inconel 718">Inconel 718</option>
-                  <option value="Inconel 718 (X Line)">
-                    Inconel 718 (X Line)
-                  </option>
-                  <option value="Stainless Steel 17-4PH">
-                    Stainless Steel 17-4PH
-                  </option>
-                  <option value="Stainless Steel 316L">
-                    Stainless Steel 316L
-                  </option>
-                  <option value="Titanium Ti-6Al-4V">Titanium Ti-6Al-4V</option>
-                  <option className="optoin_header" value="">
-                    Stereolithography (SLA)
-                  </option>
-                  <option value="ABS-Like Black (Accura 7820)">
-                    ABS-Like Black (Accura 7820)
-                  </option>
-                  <option value="ABS-Like Gray (Accura Xtreme Gray)">
-                    ABS-Like Gray (Accura Xtreme Gray)
-                  </option>
-                  <option value="ABS-Like Translucent Clear (WaterShed)">
-                    ABS-Like Translucent Clear (WaterShed)
-                  </option>
-                  <option value="ABS-Like White (Accura Xtreme White 200)">
-                    ABS-Like White (Accura Xtreme White 200)
-                  </option>
-                  <option value="Carbon ABS-Like Black Rigid Polyurethane (RPU 70)">
-                    Carbon ABS-Like Black Rigid Polyurethane (RPU 70)
-                  </option>
-                  <option value="Carbon Flame Retardant Black (EPX 86)">
-                    Carbon Flame Retardant Black (EPX 86)
-                  </option>
-                  <option value="Carbon PP-Like Black Flexible Polyurethane (FPU 50)">
-                    Carbon PP-Like Black Flexible Polyurethane (FPU 50)
-                  </option>
-                  <option value="Ceramic-Like Advanced High Temp White (PerFORM)">
-                    Ceramic-Like Advanced High Temp White (PerFORM)
-                  </option>
-                  <option value="Metal Plated Ceramic-Like (PerFORM)">
-                    Metal Plated Ceramic-Like (PerFORM)
-                  </option>
-                  <option value="MicroFine Gray™ (ABS-Like Micro Resolution)">
-                    MicroFine Gray™ (ABS-Like Micro Resolution)
-                  </option>
-                  <option value="MicroFine Green™ (ABS-Like Micro Resolution)">
-                    MicroFine Green™ (ABS-Like Micro Resolution)
-                  </option>
-                  <option value="PC-Like Advanced High Temp Translucent Amber (Accura 5530)">
-                    PC-Like Advanced High Temp Translucent Amber (Accura 5530)
-                  </option>
-                  <option value="PC-Like Translucent Clear (Accura 60)">
-                    PC-Like Translucent Clear (Accura 60)
-                  </option>
-                  <option value="PP-Like Translucent White (Somos 9120)">
-                    PP-Like Translucent White (Somos 9120)
-                  </option>
-                  <option value="True Silicone White (Parts sourced from Europe)">
-                    True Silicone White (Parts sourced from Europe)
-                  </option>
-                  <option value="" className="optoin_header">
-                    Multi Jet Fusion (MJF)
-                  </option>
-                  <option value="PA 12 40% Glass Filled Natural (As Printed)">
-                    PA 12 40% Glass Filled Natural (As Printed)
-                  </option>
-                  <option value="PA 12 40% Glass-Filled Black">
-                    PA 12 40% Glass-Filled Black
-                  </option>
-                  <option value="PA 12 Black">PA 12 Black</option>
-                  <option value="PA 12 Black with Vapor Smoothing">
-                    PA 12 Black with Vapor Smoothing
-                  </option>
-                  <option value="PA 12 Natural (As Printed)">
-                    PA 12 Natural (As Printed)
-                  </option>
-                  <option value="" className="optoin_header">
-                    Selective Laser Sintering (SLS)
-                  </option>
-                  <option value="PA 11 Black">PA 11 Black</option>
-                  <option value="PA 11 Black with Vapor Smoothing">
-                    PA 11 Black with Vapor Smoothing
-                  </option>
-                  <option value="PA 12 25% Mineral Filled*">
-                    PA 12 25% Mineral Filled*
-                  </option>
-                  <option value="PA 12 40% Glass Filled">
-                    PA 12 40% Glass Filled
-                  </option>
-                  <option value="PA 12 White">PA 12 White</option>
-                  <option value="PA 12 White with Vapor Smoothing">
-                    PA 12 White with Vapor Smoothing
-                  </option>
-                  <option value="PP Natural">PP Natural</option>
-                  <option value="TPU 70-A Black with Vapor Smoothing">
-                    TPU 70-A Black with Vapor Smoothing
-                  </option>
-                  <option value="TPU 70-A White">TPU 70-A White</option>
-                  <option value="TPU 70-A White with Vapor Smoothing">
-                    TPU 70-A White with Vapor Smoothing
-                  </option>
-                  <option value="" className="optoin_header">
-                    PolyJet (PLY)
-                  </option>
-                  <option value="Digital Black">Digital Black</option>
-                  <option value="Digital Clear/Translucent">
-                    Digital Clear/Translucent
-                  </option>
-                  <option value="Digital OverMold">Digital OverMold</option>
-                  <option value="Digital White">Digital White</option>
+                  {/* optoin_header , add this classname to make  title */}
+                  {materialList.map((material, id) => (
+                    <option value={material._id} style={{textTransform:'capitalize'}} className="" key={id}>
+                      {material.name}
+                    </option>
+                  ))}
                 </select>
               </div>
             </div>

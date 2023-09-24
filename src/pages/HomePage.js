@@ -220,40 +220,49 @@ const HomePage = () => (
       />
       <RouteWithLoader
         exact
+        path={"#/examples/404"}
+        component={NotAuthenticated}
+      />
+      <RouteWithLoader
+        exact
         path={Routes.ServerError.path}
         component={ServerError}
       />
 
-    {/* pages */}
-    <RouteWithSidebar
-      exact
-      path={Routes.Dashboard.path}
-      component={DashboardPage}
-    />
-    {/* Jobs Flow -> New Job -> Enter job title -> Upload your CAD file -> Material and Questions (CAD render & analysis) */}
-    <RouteWithSidebar exact path={"/jobs"} component={Jobs} />
-    <RouteWithSidebar exact path={"/scedule-job"} component={SceduleJobs} />
-    <RouteWithSidebar exact path="/job-details/:jobId" component={JobDetails} />
-    <RouteWithSidebar
-      exact
-      path={"/choose-service/:jobId"}
-      component={ChooseService}
-    />
-    <RouteWithSidebar
-      exact
-      path={"/upload-file/:jobId"}
-      component={FileUpload}
-    />
-    <RouteWithSidebar
-      exact
-      path={"/material-and-questions/:partsID"}
-      component={MaterialandQuestions}
-    />
-    <RouteWithSidebar exact path={"/myprofile"} component={ProfileTabs} />
-    <RouteWithSidebar exact path={"/parts"} component={MyAllParts} />
-    <RouteWithSidebar exact path={"/contact"} component={ContactPage} />
-    <RouteWithSidebar exact path={"/scedule"} component={Scedule} />
-    <RouteWithSidebar exact path={"/subscription"} component={Subscription} />
+      {/* pages */}
+      <RouteWithSidebar
+        exact
+        path={Routes.Dashboard.path}
+        component={DashboardPage}
+      />
+      {/* Jobs Flow -> New Job -> Enter job title -> Upload your CAD file -> Material and Questions (CAD render & analysis) */}
+      <RouteWithSidebar exact path={"/jobs"} component={Jobs} />
+      <RouteWithSidebar exact path={"/scedule-job"} component={SceduleJobs} />
+      <RouteWithSidebar
+        exact
+        path="/job-details/:jobId"
+        component={JobDetails}
+      />
+      <RouteWithSidebar
+        exact
+        path={"/choose-service/:jobId"}
+        component={ChooseService}
+      />
+      <RouteWithSidebar
+        exact
+        path={"/upload-file/:jobId"}
+        component={FileUpload}
+      />
+      <RouteWithSidebar
+        exact
+        path={"/material-and-questions/:partsID"}
+        component={MaterialandQuestions}
+      />
+      <RouteWithSidebar exact path={"/myprofile"} component={ProfileTabs} />
+      <RouteWithSidebar exact path={"/parts"} component={MyAllParts} />
+      <RouteWithSidebar exact path={"/contact"} component={ContactPage} />
+      <RouteWithSidebar exact path={"/scedule"} component={Scedule} />
+      <RouteWithSidebar exact path={"/subscription"} component={Subscription} />
 
       {/* old */}
       <RouteWithSidebar
@@ -360,5 +369,5 @@ const HomePage = () => (
       <Redirect to={Routes.NotFound.path} />
     </Switch>
   </>
-); 
+);
 export default HomePage;

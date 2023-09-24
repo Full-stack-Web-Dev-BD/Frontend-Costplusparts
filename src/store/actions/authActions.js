@@ -32,6 +32,7 @@ export const logout = () => (dispatch) => {
   window.localStorage.removeItem("token")
   dispatch({ type: "LOGOUT" });
   window.location.href="/#/sign-in"
+  window.location.reload()
 };
 
 export const signup =

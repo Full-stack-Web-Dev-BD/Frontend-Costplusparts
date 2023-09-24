@@ -34,11 +34,11 @@ const SceduleJobs = () => {
     }
   };
   const createJob = async () => {
-    try {
       if (!title) {
         toast.error("Title Required");
         return;
       }
+    try {
       const response = await axios.post(
         `${BASE_URL}/api/job`,
         {

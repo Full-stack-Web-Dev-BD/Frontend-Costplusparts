@@ -1,4 +1,4 @@
-import React, { useEffect ,useState} from "react";
+import React, { useEffect, useState } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -7,10 +7,13 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { Button } from "@mui/material";
+import EditMaterialModal from "./EditMaterialModal";
 
-
-export default function MaterialTable({materialList}) {
-
+export default function MaterialTable({
+  materialList,
+  deleteMaterial,
+  fetchMaterial,
+}) {
   return (
     <TableContainer component={Paper}>
       <div className="p-3">
@@ -36,15 +39,17 @@ export default function MaterialTable({materialList}) {
               <TableCell component="th" scope="row">
                 {row.name}
               </TableCell>
+              <TableCell align="center">{row.pricePerUnit}</TableCell>
+              <TableCell align="center">{row.defaultUnitAmount}</TableCell>
               <TableCell align="center">
-                {row.pricePerUnit}
-              </TableCell> 
-              <TableCell align="center">
-                {row.defaultUnitAmount}
-              </TableCell> 
-              <TableCell align="center"> 
-              <Button variant="contained" className="bg_common_button mr-2"  >Edit</Button>
-              <Button variant="outlined" color="warning"  >Delete</Button>
+                <EditMaterialModal materialDetails={row} reFetchMaterials={fetchMaterial}  title={"Edit"} />
+                <Button
+                  variant="outlined"
+                  color="warning"
+                  onClick={(e) => deleteMaterial(row._id)}
+                >
+                  Delete
+                </Button>
               </TableCell>
             </TableRow>
           ))}

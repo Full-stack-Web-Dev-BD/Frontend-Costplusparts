@@ -14,6 +14,8 @@ import { connect } from 'react-redux';
 import { login } from '../../store/actions/authActions';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux'; 
+import GoogleLoginButton from "../../components/Oauth/GoogleAuth";
+import GithubLoginButton from "../../components/Oauth/GithubAuth";
 const Signin = () => {
 
   const [email, setEmail] = useState('');
@@ -107,10 +109,10 @@ const Signin = () => {
             </div>
             <div className="d-flex justify-content-center my-4">
               <Button variant="outline-light" className="btn-icon-only btn-pill text-facebook me-2">
-                <FontAwesomeIcon icon={faFacebookF} />
+                <GoogleLoginButton/>
               </Button>
               <Button variant="outline-light" className="btn-icon-only btn-pill text-twitter me-2">
-                <FontAwesomeIcon icon={faTwitter} />
+                <GithubLoginButton/>
               </Button>
               <Button variant="outline-light" className="btn-icon-only btn-pil text-dark">
                 <FontAwesomeIcon icon={faGithub} />

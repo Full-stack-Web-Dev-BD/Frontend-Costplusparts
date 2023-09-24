@@ -52,7 +52,8 @@
 [data-theme-version="dark"] .dl_form h4 ,
 [data-theme-version="dark"] .dl_form h5 ,
 [data-theme-version="dark"] .dl_form p ,
-[data-theme-version="dark"] .dl_form p small 
+[data-theme-version="dark"] .dl_form p small ,
+[data-theme-version="dark"] .job_tab_wrap h4
 {
     color: var(--light-color) !important;
 }

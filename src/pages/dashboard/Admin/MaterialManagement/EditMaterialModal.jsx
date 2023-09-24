@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
@@ -17,17 +17,27 @@ const style = {
   p: 4,
 };
 
-export default function AddNewMaterialModal({ title, reFetchMaterials  }) {
+export default function EditMaterialModal({
+  title,
+  materialDetails,
+  reFetchMaterials,
+}) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   const [isCreating, setisCreating] = useState(false);
-  const [name, setname] = useState();
-  const [pricePerUnit, setpricePerUnit] = useState();
-  const [defaultUnitAmount, setdefaultUnitAmount] = useState();
+  const [name, setname] = useState(materialDetails.name);
+  const [pricePerUnit, setpricePerUnit] = useState(materialDetails.pricePerUnit);
+  const [defaultUnitAmount, setdefaultUnitAmount] = useState(materialDetails.defaultUnitAmount);
 
-  const addMaterial = async (e) => {
+  useEffect(() => {
+    // setname(materialDetails.name);
+    // setpricePerUnit(materialDetails.pricePerUnit);
+    // setdefaultUnitAmount(materialDetails.defaultUnitAmount);
+  });
+
+  const editMaterial = async (e) => {
     e.preventDefault();
     if (isCreating) return;
     if (!name || !pricePerUnit || !defaultUnitAmount) {
@@ -35,8 +45,8 @@ export default function AddNewMaterialModal({ title, reFetchMaterials  }) {
     } else {
       setisCreating(true);
       try {
-        const response = await axios.post(
-          `${BASE_URL}/api/admin/material`,
+        const response = await axios.put(
+          `${BASE_URL}/api/admin/material/${materialDetails._id}`,
           {
             name: name,
             pricePerUnit: pricePerUnit,
@@ -46,11 +56,11 @@ export default function AddNewMaterialModal({ title, reFetchMaterials  }) {
             headers: authTokenInHeader(),
           }
         );
-        toast.success("Material added successfully !!!");
-        handleClose()
-        setname('')
-        setpricePerUnit('')
-        setdefaultUnitAmount('')
+        toast.success("Material Updated successfully !!!");
+        handleClose();
+        setname("");
+        setpricePerUnit("");
+        setdefaultUnitAmount("");
         reFetchMaterials();
       } catch (error) {
         console.log(error);
@@ -59,10 +69,10 @@ export default function AddNewMaterialModal({ title, reFetchMaterials  }) {
     }
   };
   return (
-    <div>
+    <>
       <Button
         variant="contained"
-        className="bg_common_button"
+        className="bg_common_button mr-2"
         onClick={handleOpen}
       >
         {title}
@@ -75,9 +85,9 @@ export default function AddNewMaterialModal({ title, reFetchMaterials  }) {
       >
         <Box sx={style}>
           <div>
-            <h5>Add New Material </h5>
+            <h5>Edit Material </h5>
             <hr />
-            <form onSubmit={(e) => addMaterial(e)}>
+            <form onSubmit={(e) => editMaterial(e)}>
               <div className="mb-4">
                 <label>Name</label>
                 <input
@@ -110,17 +120,17 @@ export default function AddNewMaterialModal({ title, reFetchMaterials  }) {
               </div>
               {isCreating ? (
                 <Button type="submit" variant="outlined">
-                  Creating ...
+                  Updating ...
                 </Button>
               ) : (
-                <Button type="submit" variant="outlined">
-                  Create
+                <Button type="submit" variant="contained" className="bg_common_button">
+                  Update
                 </Button>
               )}
             </form>
           </div>
         </Box>
       </Modal>
-    </div>
+    </>
   );
 }
