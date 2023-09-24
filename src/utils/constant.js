@@ -1,7 +1,8 @@
 import jwtDecode from "jwt-decode";
 import dotenv from 'dotenv';
 
-export  const BASE_URL = "http://localhost:5000"
+export  const BASE_URL = "https://monkfish-app-c9mkw.ondigitalocean.app"
+// export  const BASE_URL = "http://localhost:5000"
 
 export const getUserID = () => {
   var userID;
